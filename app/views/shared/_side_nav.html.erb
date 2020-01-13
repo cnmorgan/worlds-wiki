@@ -1,6 +1,6 @@
 <h1 class='logo'><a href='/'>Worlds Wiki</a></h1>
 
-<% if @world %>
+<% if @world && @world.name %>
 <ul>
     <li class="nav-title"><%= @world.name %><li>
     <li><%= link_to "World Page", user_world_path(@world.name) %></li>
