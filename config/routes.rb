@@ -12,17 +12,17 @@ Rails.application.routes.draw do
   get    '/users' ,                 to: 'users#index',  as: 'users'
   post   '/users' ,                 to: 'users#create'
   get    '/users/new' ,             to: 'users#new',    as: 'new_user'
-  get    '/users/:username/edit' ,  to: 'users#edit',   as: 'edit_user',               
-  get    '/users/:username' ,       to: 'users#show',   as: 'user',                  
-  patch  '/users/:username' ,       to: 'users#update',                  
-  put    '/users/:username' ,       to: 'users#update',                  
-  delete '/users/:username' ,       to: 'users#destroy',                 
+  get    '/users/:username/edit' ,  to: 'users#edit',   as: 'edit_user'               
+  get    '/users/:username' ,       to: 'users#show',   as: 'user'                 
+  patch  '/users/:username' ,       to: 'users#update'                 
+  put    '/users/:username' ,       to: 'users#update'                 
+  delete '/users/:username' ,       to: 'users#destroy'                 
   
-  get    '/users/:username/worlds',                   to: 'worlds#index', as: 'user_worlds',    
+  get    '/users/:username/worlds',                   to: 'worlds#index', as: 'user_worlds'  
   post   '/users/:username/worlds',                   to: 'worlds#create'
-  get    '/users/:username/worlds/new',               to: 'worlds#new',   as: 'new_user_world',   
-  get    '/users/:username/worlds/:world_name/edit',  to: 'worlds#edit',  as: 'edit_user_world',  
-  get    '/users/:username/worlds/:world_name' ,      to: 'worlds#show',                          
+  get    '/users/:username/worlds/new',               to: 'worlds#new',   as: 'new_user_world' 
+  get    '/users/:username/worlds/:world_name/edit',  to: 'worlds#edit',  as: 'edit_user_world' 
+  get    '/users/:username/worlds/:world_name' ,      to: 'worlds#show'                         
   get    'worlds/:world_name',                        to: 'worlds#show',  as: 'user_world'
   patch  '/worlds/:world_name' ,                      to: 'worlds#update'
   put    '/worlds/:world_name' ,                      to: 'worlds#update'
