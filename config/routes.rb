@@ -12,17 +12,17 @@ Rails.application.routes.draw do
   get    '/users' ,                 to: 'users#index',  as: 'users'
   post   '/users' ,                 to: 'users#create'
   get    '/users/new' ,             to: 'users#new',    as: 'new_user'
-  get    '/users/:username/edit' ,  to: 'users#edit',   as: 'edit_user', :constraints  => { :username => /[0-z\.]+/ }              
-  get    '/users/:username' ,       to: 'users#show',   as: 'user',      :constraints  => { :username => /[0-z\.]+/ }            
-  patch  '/users/:username' ,       to: 'users#update',                  :constraints  => { :username => /[0-z\.]+/ }
-  put    '/users/:username' ,       to: 'users#update',                  :constraints  => { :username => /[0-z\.]+/ }
-  delete '/users/:username' ,       to: 'users#destroy',                 :constraints  => { :username => /[0-z\.]+/ }
+  get    '/users/:username/edit' ,  to: 'users#edit',   as: 'edit_user', :constraints  => { :username => /[0-z\.\s]+/ }              
+  get    '/users/:username' ,       to: 'users#show',   as: 'user',      :constraints  => { :username => /[0-z\.\s]+/ }            
+  patch  '/users/:username' ,       to: 'users#update',                  :constraints  => { :username => /[0-z\.\s]+/ }
+  put    '/users/:username' ,       to: 'users#update',                  :constraints  => { :username => /[0-z\.\s]+/ }
+  delete '/users/:username' ,       to: 'users#destroy',                 :constraints  => { :username => /[0-z\.\s]+/ }
   
-  get    '/users/:username/worlds',                   to: 'worlds#index', as: 'user_worlds',      :constraints  => { :username => /[0-z\.]+/ }
+  get    '/users/:username/worlds',                   to: 'worlds#index', as: 'user_worlds',      :constraints  => { :username => /[0-z\.\s]+/ }
   post   '/users/:username/worlds',                   to: 'worlds#create'
-  get    '/users/:username/worlds/new',               to: 'worlds#new',   as: 'new_user_world',   :constraints  => { :username => /[0-z\.]+/ }
-  get    '/users/:username/worlds/:world_name/edit',  to: 'worlds#edit',  as: 'edit_user_world',  :constraints  => { :username => /[0-z\.]+/ }
-  get    '/users/:username/worlds/:world_name' ,      to: 'worlds#show',                          :constraints  => { :username => /[0-z\.]+/ }
+  get    '/users/:username/worlds/new',               to: 'worlds#new',   as: 'new_user_world',   :constraints  => { :username => /[0-z\.\s]+/ }
+  get    '/users/:username/worlds/:world_name/edit',  to: 'worlds#edit',  as: 'edit_user_world',  :constraints  => { :username => /[0-z\.\s]+/ }
+  get    '/users/:username/worlds/:world_name' ,      to: 'worlds#show',                          :constraints  => { :username => /[0-z\.\s]+/ }
   get    'worlds/:world_name',                        to: 'worlds#show',  as: 'user_world'
   patch  '/worlds/:world_name' ,                      to: 'worlds#update'
   put    '/worlds/:world_name' ,                      to: 'worlds#update'
