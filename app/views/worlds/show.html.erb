@@ -1,0 +1,22 @@
+<% @page_title = @world.name %>
+<% if current_user_is(@world.owner) %>
+<span class='sub_title'><%= link_to "Edit World", edit_user_world_path(current_user.username, @world.name) %></span>
+<% end %>
+
+<h2>Admins</h2>
+<div class="row">
+    <div class="admins-box">
+        <ul>
+        <% @world.admins.find_each do |admin| %>
+        <li><%= link_to admin.username, user_path(admin.username) %></li>
+        <% end %>
+        <% if @world.is_admin?(current_user) %>
+        <li><%= link_to "New Admin", new_world_admin_path(@world.name) %></li>
+        <% end %>
+        </ul>
+    </div>
+</div>
+
+<div class='row'>
+    <%= link_to "View Wiki", world_wiki_path(encode(@world.name))%>
+</div>

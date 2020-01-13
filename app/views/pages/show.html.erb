@@ -1,0 +1,38 @@
+
+<% @page_title = @page.title %>
+<span class='sub-title'>From: <%= link_to @world.name, user_world_path(@world.name) %></span>
+<% if @world.is_admin?(current_user) %>
+<span class='sub-title'><%= link_to "Edit page details", edit_world_page_path(@world.name, @page.title) %></span>
+<% end %>
+
+<div class="page-content">
+
+    <div class="summary">
+        <%= @summary.html_safe %>
+    </div>
+    <div class='row'>
+        <div class='page-nav'>
+            <span class="page-nav-title">Contents</span>
+            <ul>
+                <% @sections.each do |section| %>
+                    <li><%= link_to section, "##{section}" %></li>
+                <% end %>
+            </ul>
+        </div>
+    </div>
+
+    <%= @html.html_safe %>
+    
+    <div class='category-box'>
+        <ul>
+            <span><%= link_to "Categories", user_world_categories_path(encode(@world.name)) %> :</span>
+            <% @page.categories.find_each do |category| %>
+                <li><%= link_to category.name, user_world_category_path(encode(@world.name), encode(category.name)) %>
+            <% end %>
+            <% if @world.is_admin?(current_user) %>
+            <li><%= link_to "+", new_world_page_category_path(@world.name, @page.title) %></li>
+            <% end %>
+        </ul>
+    </div>
+
+</div>

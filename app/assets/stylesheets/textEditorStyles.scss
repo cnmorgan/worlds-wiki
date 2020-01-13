@@ -1,0 +1,37 @@
+:root {
+    --border-color: rgba(50, 50, 50, 0.3);
+    --active-bg: rgba(50, 50, 50, 0.2);
+  }
+
+  .editor-toolbar{
+      border-bottom: 2px solid var(--border-color);
+      margin-bottom: 10px;
+  }
+
+  .editor{
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px 8px var(--border-color);
+    border-top: 1px solid var(--border-color);
+    padding: 15px;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+    }
+    
+  .editor-body{
+      width: 100%;
+      height: 75vh;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+  }
+
+  .toolbar-button{
+    margin: 5px;
+  }
+
+  .editor-save-button{
+    
+  }
+
+  .editor-cancel-button{
+    float: right;
+  }

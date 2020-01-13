@@ -1,0 +1,72 @@
+<% @page_title = @user.username %>
+<div>
+    <% if current_user_is(@user) %>
+    <%= link_to 'edit profile' ,edit_user_path(@user.username) %>
+    <% end %>
+</div>
+
+<h2>Worlds</h2>
+
+<div class="row">
+    <table class="table">
+        <thead>
+        <tr>
+            <% if @user.owned_worlds.empty? %>
+                <th scope='col'>No worlds yet!</th>
+            <% else %>
+                <th scope="col">Name</th>
+                <th scope="col"></th>
+                <% if current_user_is(@user) %>
+                    <th scope="col"></th>
+                <% end %>
+            <% end %>
+        </tr>
+        </thead>
+        <tbody>
+            <% if !@user.owned_worlds.empty? %>
+                <% @user.owned_worlds.find_all do |world| %>
+                    <tr>
+                        <td> <%= world.name %> </th>
+                        <td> <%= link_to "view", user_world_path(encode(world.name)) %> </td>
+                        <% if current_user_is(@user) %>
+                            <td> <%= link_to "delete", user_world_path(encode(world.name)), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+                        <% end %>
+                    </tr>
+                <% end %>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+<h2>Admin of</h2>
+<div class="row">
+    <table class="table">
+        <thead>
+        <tr>
+            <% if @user.admin_privileges.empty? %>
+                <th scope='col'>No worlds yet!</th>
+            <% else %>
+            <th scope="col">Name</th>
+            <th>Owner</th>
+            <th scope="col"></th>
+            <% end %>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+            <% if !@user.admin_privileges.empty? %>
+                <% @user.admin_privileges.find_all do |ap| %>
+                    <tr>
+                        <td> <%= ap.world.name %> </th>
+                        <td> <%= link_to "#{ap.world.owner.username}", user_path(ap.world.owner.username) %> </td>
+                        <td> <%= link_to "view", user_world_path(encode(ap.world.name)) %> </td>
+                        <% if current_user_is(ap.world.owner) %>
+                            <td> <%= link_to "Revoke Admin", destroy_world_admin_path(ap.world.name, @user.username), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+                            <% else %>
+                            <td></td>
+                        <% end %>
+                    </tr>
+                <% end %>
+            <% end %>
+        </tbody>
+    </table>
+</div>

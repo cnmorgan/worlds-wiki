@@ -1,0 +1,15 @@
+<% @page_title = "#{@world.name}: #{@category.name}: Edit" %>
+
+<div class="container form-container">
+  <%= form_for @category, url: user_world_category_path(@world.name, @category.name) do |f| %>
+    <%= render 'shared/error_messages', errors: flash[:errors] %>
+
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, autofocus: true, value: @category.name, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.submit "Update!", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

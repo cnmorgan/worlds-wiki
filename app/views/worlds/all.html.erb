@@ -1,0 +1,22 @@
+<% @page_title = "Worlds" %>
+
+<div class='container'>
+    <table class="table">
+    <thead class="">
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Owner</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+        <% World.find_each do |world| %>
+        <tr>
+            <th> <%= world.name %> </th>
+            <td> <%= link_to world.owner.username, user_path(world.owner.username) %> </td>
+            <td> <%= link_to "view", user_world_path(encode(world.name)) %> </td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+</div>

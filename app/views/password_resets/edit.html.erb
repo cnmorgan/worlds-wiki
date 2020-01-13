@@ -1,0 +1,21 @@
+<% @page_title = 'Reset password' %>
+
+<div class="container form-container">
+    <%= form_with(model: @user, url: password_reset_path(params[:id]),
+                  local: true) do |f| %>
+      <%= render 'shared/error_messages', errors: flash[:errors] %>
+
+      <%= hidden_field_tag :email, @user.email %>
+
+      <div class="form-group">
+        <%= f.label :password %>
+        <%= f.password_field :password, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password_confirmation, "Confirmation" %>
+        <%= f.password_field :password_confirmation, class: 'form-control' %>
+      </div>
+
+      <%= f.submit "Update password", class: "btn btn-primary" %>
+    <% end %>
+</div>

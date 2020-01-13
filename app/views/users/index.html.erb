@@ -1,0 +1,30 @@
+<h1>Users</h1>
+
+<table class="table">
+    <thead class="">
+    <tr>
+        <th scope="col">id</th>
+        <th scope="col">Username</th>
+        <th scope="col">Email</th>
+        <th scope="col">Site Admin?</th>
+        <th scope="col"></th>
+        <% if site_admin? %>
+            <th scope="col"></th>
+        <% end %>
+    </tr>
+    </thead>
+    <tbody>
+        <% User.find_each do |user| %>
+        <tr>
+            <th scope="row"> <%= user.id %> </th>
+            <td> <%= user.username %> </td>
+            <td> <%= user.email %> </td>
+            <td> <%= user.is_site_admin %> </td>
+            <td> <%= link_to "view", user_path(encode(user.username)) %> </td>
+            <% if site_admin? %>
+                <td> <%= link_to "delete", user_path(encode(user.username)), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+            <% end %>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
