@@ -6,7 +6,7 @@ class MainController < ApplicationController
   end
 
   def certbot
-    render text: "2NVoCC3mpgX6-TThUr357sGRALyC6wmGfB_C6qQ9DcY.9paInSbgGKnJWSnqIBI2BGJ265TadJ9i3PJCPJGLFIE"
+    render plain: "sTNQ2c4tjJC6xRuS0QZmkZAGiQL94hBEYtozrq6l1gc.9paInSbgGKnJWSnqIBI2BGJ265TadJ9i3PJCPJGLFIE", layout: false, content_type: 'text/plain'
   end
 
 end
