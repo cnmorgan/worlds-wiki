@@ -40,6 +40,12 @@ $secondary_font_color: rgba($black, .75);
 $tertiary_font_color: rgba($black, .50);
 $link_hover_color: rgb(30, 30, 250);
 
+$button-background-color: rgb(235, 235, 235);
+$button-hover-background-color: rgb(200, 200, 200);
+$button-click-background-color: rgb(70, 70, 70);
+$button-border-color: rgb(45, 45, 45);
+$button-click-font-color: $black;
+
 /* Global styles */
 body{
     color: $primary_font_color;
@@ -117,6 +123,23 @@ i{
 
     li{
         margin-bottom: 5px;
+    }
+}
+
+.btn{
+    color: $primary_font_color;
+    background-color: $button-background-color;
+    border: 1px solid $button-border-color;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    &:active{
+        background-color: $button-click-background-color;
+        color: $button-click-font-color;
+    }
+
+    &:hover{
+        background-color: $button-hover-background-color;
     }
 }
 
@@ -294,13 +317,13 @@ i{
 
 .page-nav{
     line-height: inherit;
-    padding: 12px 8px;
+    padding: 12px;
     font-size: .9rem;
     background-color: $seconday_background_color;
     border: 1px solid $seconday_border_color;
 
     ul{
-        margin-left: 5px;
+        margin-top: 8px;
     }
 
     li{
@@ -308,7 +331,6 @@ i{
     }
 
     .page-nav-title{
-        margin: 4px 4px 8px 4px;
         font-size: 1rem;
         font-weight: 700;
     }

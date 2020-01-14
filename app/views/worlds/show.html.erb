@@ -3,6 +3,10 @@
 <span class='sub_title'><%= link_to "Edit World", edit_user_world_path(current_user.username, @world.name) %></span>
 <% end %>
 
+<div class='row'>
+    <%= link_to "View Wiki", world_wiki_path(encode(@world.name)), class: "btn"%>
+</div>
+
 <h2>Admins</h2>
 <div class="row">
     <div class="admins-box">
@@ -15,8 +19,4 @@
         <% end %>
         </ul>
     </div>
-</div>
-
-<div class='row'>
-    <%= link_to "View Wiki", world_wiki_path(encode(@world.name))%>
 </div>

@@ -4,8 +4,6 @@ class PagesController < ApplicationController
   include SessionsHelper
   include PagesHelper
 
-  before_action :store_location, only: [:destroy]
-
   def index
     @world = World.find_by(name: decode(params[:world_name]))
     @pages = @world.sub_wiki.pages
@@ -98,8 +96,8 @@ class PagesController < ApplicationController
   
 
   def add_to_category
-    @category = Category.find_by(name: params[:category][:name])
     @world = World.find_by(name: decode(params[:world_name]))
+    @category = @world.categories.find_by(name: params[:category][:name])
     @page = @world.sub_wiki.pages.find_by(title: decode(params[:page_title]))
 
     if @category
@@ -110,7 +108,7 @@ class PagesController < ApplicationController
       @page.categories << @category
       flash[:success] = "#{@page.title} added to new category, #{@category.name}"
     else
-      flash[:errors] = {:name => ["could not be found"]}
+      flash[:errors] = {:name => ["cannot be blank"]}
       redirect_to new_world_page_category_path(params[:world_name], params[:page_title])
     end
     redirect_to world_page_path(@world.name, @page.title)

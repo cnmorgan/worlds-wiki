@@ -16,5 +16,7 @@ module WorldsWiki
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
     config.eager_load_paths += %W(#{config.root}/lib)
+
+    config.exceptions_app = self.routes
   end
 end

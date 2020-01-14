@@ -59,7 +59,6 @@ class WorldsController < ApplicationController
 
   def show
     @world = World.find_by(name: decode(params[:world_name]))
-    not_found if @world.nil?
   end
 
   

@@ -73,6 +73,32 @@ class CategoriesController < ApplicationController
 
   end
 
+  def get_sub_cat
+    @world = World.find_by(name: decode(params[:world_name]))
+    @category = @world.sub_wiki.categories.find_by(name: decode(params[:category_name]))  
+  end
+
+  def add_sub_cat
+    @world = World.find_by(name: decode(params[:world_name]))
+    @sub_category = @world.sub_wiki.categories.find_by(name: params[:category][:name])
+    @category = @world.sub_wiki.categories.find_by(name: params[:category_name])
+
+    if @sub_category
+      @category.sub_categories << @sub_category
+      flash[:success] = "#{@sub_category.name} added to #{@category.name}"
+    elsif !params[:category][:name].nil? && !params[:category][:name].empty?
+      @sub_category = @world.sub_wiki.categories.create!(name: params[:category][:name])
+      @category.sub_categories << @sub_category
+      flash[:success] = "#{@sub_category.name} added to category, #{@category.name}"
+    else
+      flash[:errors] = {:name => ["Name cannot be empty"]}
+      redirect_to add_sub_category_path(params[:world_name], params[:category_name])
+    end
+    redirect_to user_world_category_path(@world.name, @category.name)
+  end
+  
+  
+
   private
 
     def category_params
