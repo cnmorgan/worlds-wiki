@@ -25,9 +25,9 @@
     
     <div class='category-box'>
         <ul>
-            <span><%= link_to "Categories", user_world_categories_path(encode(@world.name)) %> :</span>
+            <span><%= link_to "Categories", user_world_categories_path(@world.name) %> :</span>
             <% @page.categories.find_each do |category| %>
-                <li><%= link_to category.name, user_world_category_path(encode(@world.name), encode(category.name)) %>
+                <li><%= link_to category.name, user_world_category_path(@world.name, category.name) %>
             <% end %>
             <% if @world.is_admin?(current_user) %>
             <li><%= link_to "+", new_world_page_category_path(@world.name, @page.title) %></li>

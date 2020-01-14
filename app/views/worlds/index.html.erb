@@ -14,9 +14,9 @@
         <% @user.owned_worlds.find_each do |world| %>
         <tr>
             <th> <%= world.name %> </th>
-            <td> <%= link_to "view", user_world_path(encode(world.name)) %> </td>
+            <td> <%= link_to "view", user_world_path(world.name) %> </td>
             <% if current_user_is(@user) %>
-            <td> <%= link_to "delete", user_world_path(encode(world.name)), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+            <td> <%= link_to "delete", user_world_path(world.name), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
             <% end %>
         </tr>
         <% end %>

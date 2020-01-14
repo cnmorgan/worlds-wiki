@@ -96,6 +96,19 @@ class CategoriesController < ApplicationController
     end
     redirect_to user_world_category_path(@world.name, @category.name)
   end
+
+  def remove_sub_cat
+    @world = World.find_by(name: decode(params[:world_name]))
+    @sub_category = @world.sub_wiki.categories.find_by(name: params[:sub_name])
+    @category = @world.sub_wiki.categories.find_by(name: params[:category_name])
+
+    @category.sub_categories.delete(@sub_category)
+
+    flash[:success] = "Successfully removed #{@sub_category.name} as sub category"
+
+    redirect_to user_world_category_path(@world.name, @category.name)
+
+  end
   
   
 

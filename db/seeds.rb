@@ -92,7 +92,13 @@ User.find_each do |user|
     
     puts "\nWorld Created\n".green
     
-    
 end
+
+puts "Creating Info world".green
+
+world = admin.owned_worlds.create(name: "Worlds Wiki")
+world.sub_wiki.pages.create(title: "Welcome", summary: "{Welcome to WorldsWiki!}", content:Parser::Parser.generate_markup(2))
+
+puts "done".green
 
 puts "\n=====Finished creating worlds=====\n".green

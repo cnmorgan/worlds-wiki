@@ -1,10 +1,10 @@
 <% @page_title = @world.name %>
-<% if current_user_is(@world.owner) %>
+<% if @world.is_admin?(current_user) %>
 <span class='sub_title'><%= link_to "Edit World", edit_user_world_path(current_user.username, @world.name) %></span>
 <% end %>
 
 <div class='row'>
-    <%= link_to "View Wiki", world_wiki_path(encode(@world.name)), class: "btn"%>
+    <%= link_to "View Wiki", world_wiki_path(@world.name), class: "btn"%>
 </div>
 
 <h2>Admins</h2>

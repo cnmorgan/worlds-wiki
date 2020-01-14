@@ -1,5 +1,16 @@
 class MainController < ApplicationController
   def index
+    @world = World.find_by(name: "Worlds Wiki")
+
+    if @world
+      @page = @world.sub_wiki.pages.find_by(title: "Welcome")
+      if @page
+        redirect_to world_page_path(@world.name, @page.title)
+      else
+        redirect_to user_world_path(@world.name)
+      end
+    end
+
   end
 
   def page_not_found

@@ -29,10 +29,6 @@ module ApplicationHelper
   def current_user_is(user)
     current_user && user && user.email && current_user.email == user.email
   end 
-  
-  def encode(text)
-    CGI::escape(text)
-  end
 
   def decode(text)
     CGI::unescape(text)

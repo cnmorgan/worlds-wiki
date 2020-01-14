@@ -16,9 +16,9 @@
             <% @pages.order("title ASC").first(@first_amount).find_all do |page| %>
             <tr>
                 <th> <%= page.title %> </th>
-                <td> <%= link_to "view", world_page_path(encode(@world.name), encode(page.title)) %> </td>
+                <td> <%= link_to "view", world_page_path(@world.name, page.title) %> </td>
                 <% if @world.is_admin?(current_user) %>
-                <td> <%= link_to "delete", world_page_path(encode(@world.name), encode(page.title)), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+                <td> <%= link_to "delete", world_page_path(@world.name, page.title), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
                 <% end %>
             </tr>
             <% end %>
@@ -40,9 +40,9 @@
         <% @pages.offset(@first_amount).order("title ASC").first(@second_amount).find_all do |page| %>   
             <tr>
                 <th> <%= page.title %> </th>
-                <td> <%= link_to "view", world_page_path(encode(@world.name), encode(page.title)) %> </td>
+                <td> <%= link_to "view", world_page_path(@world.name, page.title) %> </td>
                 <% if @world.is_admin?(current_user) %>
-                <td> <%= link_to "delete", world_page_path(encode(@world.name), encode(page.title)), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+                <td> <%= link_to "delete", world_page_path(@world.name, page.title), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
                 <% end %>
             </tr>
             <% end %>
@@ -63,9 +63,9 @@
         <% @pages.offset(@first_amount+@second_amount).order("title ASC").first(@third_amount).find_all do |page| %>   
             <tr>
                 <th> <%= page.title %> </th>
-                <td> <%= link_to "view", world_page_path(encode(@world.name), encode(page.title)) %> </td>
+                <td> <%= link_to "view", world_page_path(@world.name, page.title) %> </td>
                 <% if @world.is_admin?(current_user) %>
-                <td> <%= link_to "delete", world_page_path(encode(@world.name), encode(page.title)), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+                <td> <%= link_to "delete", world_page_path(@world.name, page.title), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
                 <% end %>
             </tr>
             <% end %>
@@ -86,9 +86,9 @@
         <% @pages.offset(@first_amount+@second_amount+@third_amount).order("title ASC").find_all do |page| %>   
             <tr>
                 <th> <%= page.title %> </th>
-                <td> <%= link_to "view", world_page_path(encode(@world.name), encode(page.title)) %> </td>
+                <td> <%= link_to "view", world_page_path(@world.name, page.title) %> </td>
                 <% if @world.is_admin?(current_user) %>
-                <td> <%= link_to "delete", world_page_path(encode(@world.name), encode(page.title)), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+                <td> <%= link_to "delete", world_page_path(@world.name, page.title), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
                 <% end %>
             </tr>
             <% end %>
