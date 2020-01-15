@@ -19,17 +19,25 @@ class WorldsController < ApplicationController
   end
 
   def create
+
     @owner = User.find_by(username: params[:username])
-    @world = World.new(name: world_params[:name], owner: @owner)
-    
-    if @world.save
-      # If user saves in the db successfully:
-      flash[:success] = "Successfully Created #{@world.name}"
-      redirect_to user_world_path(@world.name)
+
+    if @owner.owned_worlds.count == 3
+      flash[:info] = "You have reached your maximum number of worlds. To create another you must first delete one."
+      redirect_to user_path(@owner.username)
     else
-      # If user fails model validation - probably a bad password or duplicate email:
-      flash[:errors] = @world.errors
-      redirect_to new_user_world_path(params[:username])
+
+      @world = World.new(name: world_params[:name], owner: @owner)
+      
+      if @world.save
+        # If user saves in the db successfully:
+        flash[:success] = "Successfully Created #{@world.name}"
+        redirect_to user_world_path(@world.name)
+      else
+        # If user fails model validation - probably a bad password or duplicate email:
+        flash[:errors] = @world.errors
+        redirect_to new_user_world_path(params[:username])
+      end
     end
   end
   
