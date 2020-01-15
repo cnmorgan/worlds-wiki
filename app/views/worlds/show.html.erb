@@ -15,7 +15,7 @@
         <li><%= link_to admin.username, user_path(admin.username) %></li>
         <% end %>
         <% if @world.is_admin?(current_user) %>
-        <li><%= link_to "New Admin", new_world_admin_path(@world.name) %></li>
+        <li><%= link_to "+", new_world_admin_path(@world.name) %></li>
         <% end %>
         </ul>
     </div>

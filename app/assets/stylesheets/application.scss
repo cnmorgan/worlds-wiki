@@ -78,6 +78,12 @@ i{
     align-items: stretch;
 }
 
+.col{
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+}
+
 .row{
     display: flex;
     flex-direction: row;
@@ -277,9 +283,8 @@ i{
 
     h3{
         font-family: Georgia, 'Times New Roman', Times, serif;
-        font-weight: 2.5;
+        font-weight: 500;
         font-size: 1.5rem;
-        padding: 5px;
         padding-left: 0;
         margin: 5px 0;
     }
@@ -467,6 +472,25 @@ i{
             text-decoration: underline;
         }
     }
+}
+
+/* Wiki Styles */
+.list-display{
+    margin: 0 0 0 15px;
+    list-style: disc;
+    li{
+        box-sizing: border-box;
+        height: 40px;
+        font-size: .9rem;
+    }
+}
+
+.list-heading{
+    box-sizing: border-box;
+    height: 40px;
+    margin: 0;
+    font-weight: 700;
+    font-size: 1.1rem;
 }
 
 /* Debug */
