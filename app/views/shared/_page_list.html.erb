@@ -1,12 +1,10 @@
-<% col_length = 20 %>
-
 <% col_counter = 0 %>
 <div class=<%= "row" %>>
     <div class="col">
         <ul class='list-display'>
-            <% @pages.order("title ASC").find_all do |page| %>
-                    <% if page.title.chars()[0] != @heading %>
-                        <% @heading = page.title.chars()[0] %>
+            <% names.each do |name| %>
+                    <% if name.chars()[0] != @heading %>
+                        <% @heading = name.chars()[0] %>
                         </ul>
                         <h4 class="list-heading"><%= @heading %></h4>
                         <% col_counter += 1 %>
@@ -17,9 +15,9 @@
                         <% end %>
                             <ul class="list-display">
                     <% end %>
-                    <li><%= link_to page.title, world_page_path(@world.name, page.title) %> 
+                    <li><%= link_to name, "#{view}#{name}" %> 
                     <% if admin %>
-                    (<%= link_to("delete",  world_page_path(@world.name, page.title), method: :delete, data: { confirm: 'Are you sure?' }) %>)
+                    (<%= link_to("delete",  "#{delete}#{name}", method: :delete, data: { confirm: 'Are you sure?' }) %>)
                     <% end %>
                     </li>
                     <% col_counter += 1 %>

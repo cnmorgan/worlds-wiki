@@ -8,15 +8,6 @@ class PagesController < ApplicationController
     @world = World.find_by(name: decode(params[:world_name]))
     @pages = @world.sub_wiki.pages
     @page_count = @pages.count
-
-    first_half = @page_count % 2 == 0 ? @page_count/2 : @page_count/2 + 1
-    second_half = @page_count / 2
-
-    @first_amount = first_half % 2 == 0 ? first_half/2 : first_half/2 + 1
-    @second_amount = first_half / 2
-    @third_amount = second_half % 2 == 0 ? second_half/2 : second_half/2 + 1
-    @fourth_amount = second_half / 2
-
   end
 
   def new

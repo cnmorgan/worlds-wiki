@@ -1,3 +1,8 @@
 <% @page_title = "#{@world.name}'s pages" %>
-<%= render partial: "page_list", locals: {count: @page_count, pages: @pages, lengths: [@first_amount, @second_amount, @third_amount, @fourth_amount], admin: @world.is_admin?(current_user)} %>
+<%= render partial: "shared/page_list", locals: {count: @page_count, 
+                                                 names: @pages.order("title ASC").pluck(:title), 
+                                                 col_length: 15, 
+                                                 admin: @world.is_admin?(current_user),
+                                                 view: "pages/",
+                                                 delete: "pages/"} %>
 

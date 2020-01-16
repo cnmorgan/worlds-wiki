@@ -1,24 +1,8 @@
 <% @page_title = "#{@user.username}'s Worlds'" %>
 
-<table class="table">
-    <thead class="">
-    <tr>
-        <th scope="col">Name</th>
-        <th scope="col"></th>
-        <% if current_user_is(@user) %>
-        <th scope="col"></th>
-        <% end %>
-    </tr>
-    </thead>
-    <tbody>
-        <% @user.owned_worlds.find_each do |world| %>
-        <tr>
-            <th> <%= world.name %> </th>
-            <td> <%= link_to "view", user_world_path(world.name) %> </td>
-            <% if current_user_is(@user) %>
-            <td> <%= link_to "delete", user_world_path(world.name), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
-            <% end %>
-        </tr>
-        <% end %>
-    </tbody>
-</table>
+<%= render partial: "shared/page_list", locals: {count: @user.owned_worlds.count, 
+                                                names: @user.owned_worlds.order("name ASC").pluck(:name), 
+                                                col_length: 15, 
+                                                admin: current_user_is(@user),
+                                                view: root_url + "/worlds/",
+                                                delete: root_url + "/worlds/"} %>

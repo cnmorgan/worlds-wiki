@@ -1,22 +1,8 @@
 <% @page_title = "Worlds" %>
 
-<div class='container'>
-    <table class="table">
-    <thead class="">
-    <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Owner</th>
-        <th scope="col"></th>
-    </tr>
-    </thead>
-    <tbody>
-        <% World.find_each do |world| %>
-        <tr>
-            <th> <%= world.name %> </th>
-            <td> <%= link_to world.owner.username, user_path(world.owner.username) %> </td>
-            <td> <%= link_to "view", user_world_path(world.name) %> </td>
-        </tr>
-        <% end %>
-    </tbody>
-</table>
-</div>
+<%= render partial: "shared/page_list", locals: {count: World.count, 
+                                                 names: World.order("name ASC").pluck(:name), 
+                                                 col_length: 15, 
+                                                 admin: false,
+                                                 view: "worlds/",
+                                                 delete: "worlds/"} %>
