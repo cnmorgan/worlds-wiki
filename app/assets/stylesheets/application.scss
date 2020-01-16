@@ -485,6 +485,12 @@ i{
     }
 }
 
+.list-display-ordered{
+    @extend .list-display;
+
+    list-style-type: decimal;
+}
+
 .list-heading{
     box-sizing: border-box;
     height: 25px;

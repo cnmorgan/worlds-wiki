@@ -4,70 +4,27 @@
 <span class='sub-title'>Parent Category: <%= link_to @category.category.name, user_world_category_path(@world.name, @category.category.name) %></span>
 <% end %>
 <h2>Sub Categories</h2>
-<table class="table">
-    <thead class="">
-    <tr>
-        <th scope="col">Name</th>
-        <th scope="col"></th>
-        <% if @world.is_admin?(current_user) %>
-            <th scope="col"></th>
-            <th scope="col"></th>
-        <% end %>
-    </tr>
-    </thead>
-    <tbody>
-        <% @category.sub_categories.find_all do |category| %>
-            <tr>
-                <th scope="row"> <%= category.name %> </th>
-                <td> <%= link_to "view", user_world_category_path(@world.name, category.name) %> </td>
-                <% if @world.is_admin?(current_user) %>
-                    <td> <%= link_to "delete", user_world_category_path(@world.name, category.name), method: :delete, data: { confirm: "Delete #{category.name}?" } %> </td>
-                    <td> <%= link_to "remove", remove_sub_category_path(@world.name,@category.name, category.name), method: :delete, data: { confirm: "Remove #{category.name} as sub-category?" } %> </td>
-                <% end %>
-            </tr>
-        <% end %>
-        <% if @world.is_admin?(current_user) %>
-            <tr>
-                <td><%= link_to "+", add_sub_category_path(@world.name, @category.name) %></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        <% end %>
-    </tbody>
-</table>
+<span class="sub-title"><%= link_to "Add Sub Category", add_sub_category_path(@world.name, @category.name) %></span>
+<% if @world.sub_wiki.categories.empty? %>
+<div>
+    <p>No Categories yet!</p>
+</div>
+<% else %>
+<%= render partial: "shared/page_list", locals: {count: @category.sub_categories.count, 
+                                                names: @category.sub_categories.order("name ASC").pluck(:name), 
+                                                col_length: 15, 
+                                                admin: @world.is_admin?(current_user),
+                                                view: "",
+                                                delete: ""} %>
+<% end %>
 
 <h2>Pages</h2>
-<table class="table">
-    <thead class="">
-    <tr>
-        <th scope="col">Name</th>
-        <th scope="col"></th>
-        <% if @world.is_admin?(current_user) %>
-            <th scope="col"></th>
-            <th scope="col"></th>
-        <% end %>
-    </tr>
-    </thead>
-    <tbody>
-        <% @category.pages.find_all do |page| %>
-            <tr>
-                <th scope="row"> <%= page.title %> </th>
-                <td> <%= link_to "view", world_page_path(@world.name, page.title) %> </td>
-                <% if @world.is_admin?(current_user) %>
-                    <td> <%= link_to "delete",  world_page_path(@world.name, page.title), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
-                    <td> <%= link_to "remove",  remove_page_from_category_path(@world.name, @category.name, page.title), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
-                <% end %>
-            </tr>
-        <% end %>
-        <% if @world.is_admin?(current_user) %>
-        <tr>
-            <td> <%= link_to "New Page", new_world_page_path(@world.name, category: @category.name) %> </td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <% end %>
-    </tbody>
-</table>
+<span class="sub-title"><%= link_to "Add Page", new_world_page_path(@world.name, category: @category.name) %></span>
+<%= render partial: "shared/page_list", locals: {count: @category.pages.count, 
+                                                 names: @category.pages.order("title ASC").pluck(:title), 
+                                                 col_length: 15, 
+                                                 admin: @world.is_admin?(current_user),
+                                                 view: root_url + "worlds/#{@world.name}/wiki/pages/",
+                                                 delete: root_url + "worlds/#{@world.name}/wiki/pages/"} %>
+
 

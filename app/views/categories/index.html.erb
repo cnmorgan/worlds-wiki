@@ -1,8 +1,14 @@
-<h1><%= @world.name %>'s Wiki: Categories</h1>
+<% @page_title = "#{@world.name}'s Wiki: Categories" %>
 <span class="sub-title"><%= link_to "Add Category", new_user_world_category_path(params[:world_name]) %></span>
-    <%= render partial: "shared/page_list", locals: {count: @world.sub_wiki.categories.count, 
-                                                    names: @world.sub_wiki.categories.order("name ASC").pluck(:name), 
-                                                    col_length: 15, 
-                                                    admin: @world.is_admin?(current_user),
-                                                    view: "categories/",
-                                                    delete: "categories/"} %>
+<% if @world.sub_wiki.categories.empty? %>
+<div>
+    <p>No Categories yet!</p>
+</div>
+<% else %>
+<%= render partial: "shared/page_list", locals: {count: @world.sub_wiki.categories.count, 
+                                                names: @world.sub_wiki.categories.order("name ASC").pluck(:name), 
+                                                col_length: 15, 
+                                                admin: @world.is_admin?(current_user),
+                                                view: "categories/",
+                                                delete: "categories/"} %>
+<% end %>

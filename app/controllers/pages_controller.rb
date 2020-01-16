@@ -4,6 +4,8 @@ class PagesController < ApplicationController
   include SessionsHelper
   include PagesHelper
 
+  before_action :increment_view_count, only: [:show]
+
   def index
     @world = World.find_by(name: decode(params[:world_name]))
     @pages = @world.sub_wiki.pages
@@ -111,4 +113,15 @@ class PagesController < ApplicationController
   def page_params
     params.require(:page).permit(:title, :summary, :content)
   end
+
+  def increment_view_count
+    @world = World.find_by(name: decode(params[:world_name]))
+    @page = @world.sub_wiki.pages.find_by(title: decode(params[:page_title]))
+
+    if @page
+      @page.view_count += 1;
+      @page.save
+    end
+  end
+  
 end
