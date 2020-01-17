@@ -23,7 +23,7 @@ class AdminsController < ApplicationController
 
         @user.admin_privileges.find_by(world_id: @world.id).destroy unless @user.username == @world.owner.username
 
-        redirect_to user_path(@user.username)
+        redirect_to user_world_path(@world.name)
 
     end
     

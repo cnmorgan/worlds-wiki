@@ -12,7 +12,12 @@
     <div class="admins-box">
         <ul>
         <% @world.admins.find_each do |admin| %>
-        <li><%= link_to admin.username, user_path(admin.username) %></li>
+        <li>
+            <%= link_to admin.username, user_path(admin.username) %>
+            <% if @world.is_admin?(current_user) && !current_user_is(admin) && admin.username != @world.owner.username %>
+            (<%= link_to "revoke", destroy_world_admin_path(@world.name, admin.username), method: :delete, data: {confirm: "Revoke admin #{admin.username}?"} %>)
+            <% end %>
+        </li>
         <% end %>
         <% if @world.is_admin?(current_user) %>
         <li><%= link_to "+", new_world_admin_path(@world.name) %></li>
