@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  get 'edits/index'
   if Rails.env.production?
     get '404', :to => 'main#page_not_found'
   end
@@ -72,6 +73,8 @@ Rails.application.routes.draw do
             delete '/worlds/:world_name/admins/:username',        to: 'admins#destroy',as: 'destroy_world_admin', format: false
 
             get     'account_activation/:id/edit', to: 'account_activations#edit', as: 'account_activation'
+
+            get    '/worlds/:world_name/wiki/pages/:page_title/edits', to: 'edits#index', as: 'page_edits'
             resources :password_resets,     only: [:new, :create, :edit, :update]
         end
        end

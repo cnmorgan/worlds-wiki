@@ -4,6 +4,7 @@
 <% if @world.is_admin?(current_user) %>
 <span class='sub-title'><%= link_to "Edit page details", edit_world_page_path(@world.name, @page.title) %></span>
 <% end %>
+<span class="sub-title"><%= link_to "Edits",page_edits_path(@world.name, @page.title) %>
 
 <div class="page-content">
 

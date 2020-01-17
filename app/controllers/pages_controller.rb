@@ -45,8 +45,10 @@ class PagesController < ApplicationController
     @world = World.find_by(name: decode(params[:world_name]))
     not_found if @world.nil?
     @page = @world.sub_wiki.pages.find_by(title: decode(params[:page_title]))
+    original_content = @page.content
 
     if @page.update(page_params)
+      Edit.create!(page: @page, user: current_user, content: original_content) unless @page.content == original_content
       flash[:success] = "Page updated"
       redirect_to world_page_path(@world.name, @page.title)
     else

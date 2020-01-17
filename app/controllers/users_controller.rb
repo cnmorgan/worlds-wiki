@@ -36,6 +36,8 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find_by(username: decode(params[:username]))
+    params[:page] = 1 unless params[:page]
+    @edits = @user.edits.paginate(page: params[:page], per_page: 10)
     not_found if @user.nil?
   end
   
