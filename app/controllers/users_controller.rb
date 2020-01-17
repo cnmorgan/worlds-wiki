@@ -28,6 +28,10 @@ class UsersController < ApplicationController
   end
 
   def index
+    unless current_user && current_user.is_site_admin
+      flash[:danger] = "You don't have permission to do that"
+      redirect_to root_path
+    end
   end
   
   def show
