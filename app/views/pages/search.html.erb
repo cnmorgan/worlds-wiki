@@ -4,7 +4,7 @@
 <div class="search-result">
     <h3><%= link_to page.title, world_page_path(@world.name, page.title) %></h3>
     <div class="result-summary">
-    <%= parse(page.summary, params)[:html].html_safe %>
+    <p><%= as_text(page.summary)[0..30] %>...</p>
     </div>
 </div>
 <% end %>

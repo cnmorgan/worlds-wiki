@@ -149,6 +149,12 @@ i{
     }
 }
 
+.box{
+    background-color: $seconday_background_color;
+    border: 1px solid $seconday_border_color;
+    padding: 5px;
+}
+
 /* Table styles */
 .table{
     padding: 0;
@@ -283,7 +289,7 @@ i{
 
     h3{
         font-family: Georgia, 'Times New Roman', Times, serif;
-        font-weight: 500;
+        font-weight: 700;
         font-size: 1.5rem;
         padding-left: 0;
         margin: 5px 0;
@@ -493,7 +499,7 @@ i{
 
 .list-heading{
     box-sizing: border-box;
-    height: 25px;
+    height: 28px;
     margin: 0;
     font-weight: 700;
     font-size: 1.1rem;
@@ -508,6 +514,7 @@ i{
 
     h3{
         border-bottom: 1px solid $seconday_border_color;
+        padding: 5px;
         a{
             text-decoration: none;
     

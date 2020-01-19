@@ -33,6 +33,12 @@ class CategoriesController < ApplicationController
   def new
     @category = Category.new
     @world = World.find_by(name: decode(params[:world_name]))
+
+    # Stub, change to value based un subscription in the future
+    if @world.sub_wiki.categories.count > 34
+      flash[:info] = "You have reached the maximum number of categories(#{@world.sub_wiki.categories.count}) for this world."
+      redirect_to world_wiki_path(@world.name)
+    end
   end
 
   def create
@@ -83,10 +89,21 @@ class CategoriesController < ApplicationController
     @sub_category = @world.sub_wiki.categories.find_by(name: params[:category][:name])
     @category = @world.sub_wiki.categories.find_by(name: params[:category_name])
 
+    
     if @sub_category
-      @category.sub_categories << @sub_category
+      #don't add self as sub category
+      if @category.name == @sub_category.name
+        flash[:errors] = {"" => ["Cannot add category to itself"]}
+        redirect_to add_sub_category_path(params[:world_name], params[:category_name])
+        return
+      end
+      # Dont add a sub category twice
+      unless @category.sub_categories.exists?(@sub_category.id)
+        @category.sub_categories << @sub_category
+      end
       flash[:success] = "#{@sub_category.name} added to #{@category.name}"
     elsif !params[:category][:name].nil? && !params[:category][:name].empty?
+      # If the queried category does not exist, create it
       @sub_category = @world.sub_wiki.categories.create!(name: params[:category][:name])
       @category.sub_categories << @sub_category
       flash[:success] = "#{@sub_category.name} added to category, #{@category.name}"

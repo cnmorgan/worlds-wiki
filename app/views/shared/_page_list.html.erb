@@ -1,4 +1,5 @@
 <% col_counter = 0 %>
+<% @heading = nil %>
 <div class=<%= "row" %>>
     <div class="col">
         <ul class='list-display'>
@@ -15,7 +16,11 @@
                         <% end %>
                             <ul class="list-display">
                     <% end %>
-                    <li><%= link_to name, "#{view}#{name}" %> 
+                    <li>
+                    <%= link_to name, "#{view}#{name}" %>
+                    <% if admin %>
+                     - (<%= link_to "Delete", "#{delete}#{name}", method: :delete, data: {confirm: "Are you sure?"} %>) 
+                    <% end %>
                     </li>
                     <% col_counter += 1 %>
                     <% if col_counter > col_length %>

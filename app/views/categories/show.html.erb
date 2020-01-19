@@ -18,18 +18,18 @@
 <% else %>
 <%= render partial: "shared/page_list", locals: {count: @category.sub_categories.count, 
                                                 names: @category.sub_categories.order("name ASC").pluck(:name), 
-                                                col_length: 15, 
+                                                col_length: 25, 
                                                 admin: @world.is_admin?(current_user),
                                                 view: "",
-                                                delete: ""} %>
+                                                delete: "#{@category.name}/remove_cat/"} %>
 <% end %>
 
 <h2>Pages</h2>
 <span class="sub-title"><%= link_to "Add Page", new_world_page_path(@world.name, category: @category.name) %></span>
 <%= render partial: "shared/page_list", locals: {count: @category.pages.count, 
                                                  names: @category.pages.order("title ASC").pluck(:title), 
-                                                 col_length: 15, 
-                                                 admin: @world.is_admin?(current_user),
+                                                 col_length: 25, 
+                                                 admin: false,
                                                  view: root_url + "worlds/#{@world.name}/wiki/pages/",
                                                  delete: root_url + "worlds/#{@world.name}/wiki/pages/"} %>
 

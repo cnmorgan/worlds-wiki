@@ -2,7 +2,7 @@
 
 <%= render partial: "shared/page_list", locals: {count: @user.owned_worlds.count, 
                                                 names: @user.owned_worlds.order("name ASC").pluck(:name), 
-                                                col_length: 15, 
-                                                admin: current_user_is(@user),
+                                                col_length: 35, 
+                                                admin: false,
                                                 view: root_url + "/worlds/",
                                                 delete: root_url + "/worlds/"} %>

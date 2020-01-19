@@ -10,7 +10,7 @@
     <div class="col">
         <% unless @user.edits.empty? %>
             <ul class="list-display">
-            <% @edits.find_all do |edit| %>
+            <% @edits.order("created_at DESC").find_all do |edit| %>
                 <li><%= link_to edit.page.title, world_page_path(edit.page.sub_wiki.world.name, edit.page.title) %><%= " - #{edit.summary} - #{ edit.created_at.strftime("%d-%m-%Y")}" %></li>
             <% end %>
             </ul>
@@ -29,7 +29,7 @@
     <%= render partial: "shared/page_list", locals: {count: @user.owned_worlds.count, 
                                                     names: @user.owned_worlds.order("name ASC").pluck(:name), 
                                                     col_length: 15, 
-                                                    admin: current_user_is(@user),
+                                                    admin: false,
                                                     view: root_url + "/worlds/",
                                                     delete: root_url + "/worlds/"} %>
     <% end %>

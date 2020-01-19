@@ -19,8 +19,8 @@
 <% else %>
 <%= render partial: "shared/page_list", locals: {count: @world.sub_wiki.categories.count, 
                                                 names: @world.sub_wiki.categories.order("name ASC").pluck(:name), 
-                                                col_length: 15, 
-                                                admin: @world.is_admin?(current_user),
+                                                col_length: 25, 
+                                                admin: false,
                                                 view: "wiki/categories/",
                                                 delete: "wiki/categories/"} %>
 <% end %>

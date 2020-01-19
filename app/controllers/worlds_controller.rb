@@ -16,16 +16,17 @@ class WorldsController < ApplicationController
   
   def new
     @world = World.new
+
+    #stub. In the future this should be determined by user status
+    if @owner.owned_worlds.count == 3
+      flash[:info] = "You have reached your maximum number of worlds. (#{@owner.owned_worlds.count})"
+      redirect_to user_path(@owner.username)
+    else
   end
 
   def create
 
     @owner = User.find_by(username: params[:username])
-
-    if @owner.owned_worlds.count == 3
-      flash[:info] = "You have reached your maximum number of worlds. To create another you must first delete one."
-      redirect_to user_path(@owner.username)
-    else
 
       @world = World.new(name: world_params[:name], owner: @owner)
       

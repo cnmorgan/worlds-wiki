@@ -17,7 +17,7 @@ class PagesController < ApplicationController
     @page = Page.new
 
     # Stub, change to value based un subscription in the future
-    if @world.sub_wiki.pages.count > 35
+    if @world.sub_wiki.pages.count > 99
       flash[:info] = "You have reached the maximum number of pages(#{@world.sub_wiki.pages.count}) for this world."
       redirect_to world_wiki_path(@world.name)
     end
@@ -45,6 +45,8 @@ class PagesController < ApplicationController
     @world = World.find_by(name: decode(params[:world_name]))
     not_found if @world.nil?
     @page = @world.sub_wiki.pages.find_by(title: decode(params[:page_title]))
+
+    @defaults = {title: @page.title, summary: @page.summary, content: @page.content}
   end
 
   def update
@@ -73,8 +75,9 @@ class PagesController < ApplicationController
           redirect_to edit_world_page_path(@world.name, params[:page_title])
         end
       else
-        flash[:errors] = {"edit summary" => ["cannot be blank"]}
-        redirect_to edit_world_page_path(@world.name, params[:page_title])
+        flash.now[:errors] = {"edit summary" => ["cannot be blank"]}
+        @defaults = {title: @page.title, summary: @page.summary, content: @page.content}
+        render :edit
       end
     end
   end
@@ -125,7 +128,10 @@ class PagesController < ApplicationController
     @page = @world.sub_wiki.pages.find_by(title: decode(params[:page_title]))
 
     if @category
-      @page.categories << @category
+      #dont add it to a category twice
+      unless @page.categories.exists?(@category.id)
+        @page.categories << @category
+      end
       flash[:success] = "#{@page.title} added to #{@category.name}"
     elsif !params[:category][:name].nil? && !params[:category][:name].empty?
       @category = @world.sub_wiki.categories.create!(name: params[:category][:name])

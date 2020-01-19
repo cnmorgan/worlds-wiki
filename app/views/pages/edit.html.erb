@@ -5,15 +5,15 @@
     <%= render 'shared/error_messages', errors: flash[:errors] %>
     <div class="form-group">
       <%= f.label :title %>
-      <%= f.text_field :title, value: @page.title, autofocus: true, class: "form-control" %>
+      <%= f.text_field :title, value: @defaults[:title], autofocus: true, class: "form-control" %>
     </div>
     <div class="form-group">
       <%= f.label :summary %>
-      <%= f.text_area :summary, :cols => 300, :rows => 15, value: @page.summary, class: "form-control" %>
+      <%= f.text_area :summary, :cols => 300, :rows => 15, value: @defaults[:summary], class: "form-control" %>
     </div>
     <div class="form-group">
       <%= f.label :content %>
-      <%= f.text_area :content, :cols => 250, :rows => 20, value: @page.content, class: "form-control" %>
+      <%= f.text_area :content, :cols => 250, :rows => 20, value: @defaults[:content], class: "form-control" %>
     </div>
     <div class="form-group">
       <%= f.label :edit_summary %>

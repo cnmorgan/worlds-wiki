@@ -4,26 +4,23 @@ module Parser
         @@boldRegex = /\*([^*]+)\*/              
         @@italicRegex = /\/\/([^\/\/]+)\/\//        
         @@strikethroughRegex = /\-\-([^\-\-]+)\-\-/     
-        @@underlineRegex = /__([^__]+)__/         
-        @@superscriptRegex = /\^\$([^$]+)\$/      
-        @@subscriptRegex = /v\$([^$)]+)\$/         
+        @@underlineRegex = /__([^__]+)__/      
         @@headingRegex = /(#+) (.+)\n/            
         @@paragraphRegex = /{\n*([^{}]+)\n*}/
         @@sectionRegex = /\=\=([^\=]+)\=\=(?:\s*\n)([^====]*)\=\=\=\=/
         @@directlinkRegex = /\[\s*([^\[\]]+)\s*\|\s*([^\[\]]+)\]/
         @@inferredlinkRegex = /\[\s*([^\[\]\|]+)\s*\]/
         
-        def self.toHTML(text, params)
+        def self.to_HTML(text, params)
             sections = []
 
             html = text    
-            .gsub(@@paragraphRegex) { 
-                puts $1
+            .gsub(@@paragraphRegex) {
                 self.formatParagraph($1)
              }
             .gsub(/\\</, '&lt;')
             .gsub(/\\>/, '&gt;')
-            .gsub(@@sectionRegex      ) {
+            .gsub(@@sectionRegex) {
                 sections << $1
                 "<div id=\"#{$1}\">\n<h2>#{$1}</h2>\n#{$2}</div>"
             }
@@ -32,12 +29,29 @@ module Parser
             .gsub(@@italicRegex       ) { "<i>#{$1}</i>"                           }
             .gsub(@@boldRegex         ) { "<b>#{$1}</b>"                           }   
             .gsub(@@strikethroughRegex) { "<del>#{$1}</del>"                       }           
-            .gsub(@@underlineRegex    ) { "<ins>#{$1}</ins>"                       }           
-            .gsub(@@superscriptRegex  ) { "<sup>#{$1}</sup>"                       }           
-            .gsub(@@subscriptRegex    ) { "<sub>#{$1}</sub>"                       }     
+            .gsub(@@underlineRegex    ) { "<ins>#{$1}</ins>"                       } 
             .gsub(@@headingRegex      ) { "<h#{$1.length}>#{$2}</h#{$1.length}>"   }
 
             return {html: html, sections: sections}
+        end
+
+        def self.to_text(text)
+            html = text    
+            .gsub(@@paragraphRegex) {
+                "\n#{$1}\n"
+             }
+            .gsub(@@sectionRegex) {
+                "\n#{$1}\n#{$2}"
+            }
+            .gsub(@@directlinkRegex) {"#{$2}"}
+            .gsub(@@inferredlinkRegex) {"#{$1}"}
+            .gsub(@@italicRegex       ) { "#{$1}" }
+            .gsub(@@boldRegex         ) { "#{$1}" }   
+            .gsub(@@strikethroughRegex) { "#{$1}" }           
+            .gsub(@@underlineRegex    ) { "#{$1}" } 
+            .gsub(@@headingRegex      ) { "#{$2}" }
+
+            return html
         end
 
         def self.generate_markup(num_sections)
