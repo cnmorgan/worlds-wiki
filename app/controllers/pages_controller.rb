@@ -109,7 +109,7 @@ class PagesController < ApplicationController
 
     @page.destroy
 
-    redirect_to world_pages_path(decode(params[:world_name]))
+    redirect_to world_wiki_path(decode(params[:world_name]))
 
   end
 
