@@ -67,6 +67,7 @@ Rails.application.routes.draw do
             delete '/worlds/:world_name/wiki/pages/:page_title' ,             to: 'pages#destroy'
             post   '/worlds/:world_name/wiki/pages/:page_title/add-category', to: 'pages#add_to_category'
             get    '/worlds/:world_name/wiki/pages/:page_title/add-category', to: 'pages#get_category',   as: 'new_world_page_category'
+            get    '/worlds/:world_name/wiki/search',                         to: 'pages#search',         as: 'page_search'
 
             get    '/worlds/:world_name/admins/new',              to: 'admins#new',    as: 'new_world_admin'
             post   '/worlds/:world_name/admins',                  to: 'admins#create', as: 'create_world_admin'

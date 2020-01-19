@@ -1,0 +1,12 @@
+<% @page_title = "Search: #{params[:search]} in #{@world.name}" %>
+
+<% @pages.find_each do |page| %>
+<div class="search-result">
+    <h3><%= link_to page.title, world_page_path(@world.name, page.title) %></h3>
+    <div class="result-summary">
+    <%= parse(page.summary, params)[:html].html_safe %>
+    </div>
+</div>
+<% end %>
+
+<%= will_paginate @pages %>

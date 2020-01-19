@@ -139,6 +139,16 @@ class PagesController < ApplicationController
 
   end
   
+  def search
+    unless params[:page]
+      params[:page] = 1
+    end
+
+    @world = World.find_by(name: params[:world_name])
+    @pages = @world.sub_wiki.pages.basic_search(params[:search]).paginate(page: params[:page], per_page: 15)
+    
+  end
+
   private
 
   def page_params

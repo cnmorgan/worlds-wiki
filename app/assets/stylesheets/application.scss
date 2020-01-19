@@ -499,6 +499,25 @@ i{
     font-size: 1.1rem;
 }
 
+/* Search styles */
+.search-result{
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid $black;
+    background-color: $seconday_background_color;
+
+    h3{
+        border-bottom: 1px solid $seconday_border_color;
+        a{
+            text-decoration: none;
+    
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
 /* Debug */
 .debug_dump
 {

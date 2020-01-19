@@ -1,12 +1,12 @@
 <header class="page-header">
     <nav class="navbar container">
 
-    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-    <input type="hidden" name="cmd" value="_donations" />
-    <input type="hidden" name="business" value="D9R94HZBBV6Q2" />
-    <input type="hidden" name="currency_code" value="USD" />
-    <input type="submit" value="Donate" class="donate-btn" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button"/>
-    </form>
+    <%= form_tag(page_search_path(@world.name), :method => "get", class: 'navbar-form navbar-left') do %>  
+    <div class="">  
+        <%= search_field_tag :search, params[:search], placeholder: "Search #{@world.name}", class: "form-control" %>  
+        <%= button_tag "Search", :class => '',:name => nil%>  
+    </div>  
+    <% end %>
 
     </nav>
 </header>
