@@ -50,8 +50,33 @@ class UsersController < ApplicationController
     @user = User.find_by(username: decode(params[:username]))
     not_found if @user.nil?
 
-    @user.username = params[:user][:username]
-    @user.email = params[:user][:email]
+    if params[:user]
+      @user.username = params[:user][:username]
+      @user.email = params[:user][:email]
+    end
+
+    if params[:new_password]
+      if params[:new_password][:current_password].empty? || params[:new_password][:new_password].empty? || params[:new_password][:new_password_confirmation].empty?
+        flash[:pass_errors] = {:all => ["fields are required."]}
+        redirect_to edit_user_path(decode(params[:username]))
+        return
+      end
+      if @user.authenticated?(:password, params[:new_password][:current_password])
+        if @user.update(password: params[:new_password][:new_password], password_confirmation: params[:new_password][:new_password_confirmation])
+          flash[:success] = "Successfully updated profile"
+          redirect_to user_path(@user.username)
+          return
+        else
+          flash[:pass_errors] = @user.errors
+          redirect_to edit_user_path(decode(params[:username]))
+          return
+        end
+      else
+        flash[:pass_errors] = {password: ["is incorrect"]}
+        redirect_to edit_user_path(decode(params[:username]))
+        return
+      end
+    end
 
     if @user.save
       flash[:success] = "Successfully updated profile"

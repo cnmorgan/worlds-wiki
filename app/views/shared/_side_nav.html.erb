@@ -20,6 +20,7 @@
     <li class='nav-title'>Account</li>
     <% if !current_user.nil? %>
         <li><%= link_to current_user.username, user_path(current_user.username), class: "nav-link" %></li>
+        <li><%= link_to 'Edit Profile' ,edit_user_path(current_user.username) %></li>
         <li><%= link_to "Logout", logout_path, method: :delete, class: "nav-link" %></li>
     <% else %>
         <li><a class="nav-link" href="/login">Login</a></li>

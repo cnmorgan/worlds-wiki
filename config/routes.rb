@@ -24,6 +24,7 @@ Rails.application.routes.draw do
             get    '/users/:username' ,       to: 'users#show',   as: 'user'
             patch  '/users/:username' ,       to: 'users#update'
             put    '/users/:username' ,       to: 'users#update'
+            post   '/users/:username',        to: 'users#update'
             delete '/users/:username' ,       to: 'users#destroy'
             
             get    '/users/:username/worlds',                   to: 'worlds#index', as: 'user_worlds'  
