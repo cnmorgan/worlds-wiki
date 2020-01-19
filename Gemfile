@@ -38,6 +38,7 @@ gem 'github-markup'
 
 gem 'will_paginate', '~> 3.1.0'
 
+#searching gem
 gem 'textacular', '~> 5.0'
 
 group :development, :test do

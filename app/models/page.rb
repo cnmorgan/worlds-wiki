@@ -1,10 +1,12 @@
 class Page < ApplicationRecord
 
+    scope :in, ->(world) { where(sub_wiki_id: world.sub_wiki.id) }
+    
     belongs_to :sub_wiki
     has_many :page_categories, dependent: :destroy
     has_many :categories, :through => :page_categories
     has_many :edits, dependent: :destroy
-
+    
     validates :title, presence: true
     validate :unique_to_wiki
 
