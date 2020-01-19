@@ -1,10 +1,10 @@
 
 <% @page_title = @page.title %>
-<span class='sub-title'>From: <%= link_to @world.name, user_world_path(@world.name) %></span>
+<span class='sub-title'>From: <%= link_to @world.name, user_world_path(@world.name) %>
 <% if @world.is_admin?(current_user) %>
-<span class='sub-title'><%= link_to "Edit page details", edit_world_page_path(@world.name, @page.title) %></span>
+ - <%= link_to "Edit page details", edit_world_page_path(@world.name, @page.title) %>
 <% end %>
-<span class="sub-title"><%= link_to "Edits",page_edits_path(@world.name, @page.title) %>
+ - <%= link_to "Edits",page_edits_path(@world.name, @page.title) %></span>
 
 <div class="page-content">
 

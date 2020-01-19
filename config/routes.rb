@@ -62,7 +62,7 @@ Rails.application.routes.draw do
             get    '/worlds/:world_name/wiki/pages/new',                      to: 'pages#new',            as: 'new_world_page'
             get    '/worlds/:world_name/wiki/pages/:page_title/edit',         to: 'pages#edit',           as: 'edit_world_page'
             get    '/worlds/:world_name/wiki/pages/:page_title',              to: 'pages#show',           as: 'world_page'
-            patch  '/worlds/:world_name/wiki/pages/:page_title' ,             to: 'pages#update'
+            post   '/worlds/:world_name/wiki/pages/:page_title' ,             to: 'pages#update'
             put    '/worlds/:world_name/wiki/pages/:page_title' ,             to: 'pages#update'
             delete '/worlds/:world_name/wiki/pages/:page_title' ,             to: 'pages#destroy'
             post   '/worlds/:world_name/wiki/pages/:page_title/add-category', to: 'pages#add_to_category'

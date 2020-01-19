@@ -39,7 +39,7 @@ User.find_each do |user|
 
     print "Adding pages".yellow
 
-    for j in 1..36 do
+    for j in 1..35 do
         world.sub_wiki.pages.create(title: Faker::Books::Lovecraft.unique.word, summary: "{This is a summary stub}", content: Parser::Parser.generate_markup(5))
         print '.'.yellow
     end

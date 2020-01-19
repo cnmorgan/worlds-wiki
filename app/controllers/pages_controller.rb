@@ -15,6 +15,12 @@ class PagesController < ApplicationController
   def new
     @world = World.find_by(name: decode(params[:world_name]))
     @page = Page.new
+
+    # Stub, change to value based un subscription in the future
+    if @world.sub_wiki.pages.count > 35
+      flash[:info] = "You have reached the maximum number of pages(#{@world.sub_wiki.pages.count}) for this world."
+      redirect_to world_wiki_path(@world.name)
+    end
   end
 
   def create
@@ -22,7 +28,7 @@ class PagesController < ApplicationController
     not_found if @world.nil?
     @page = Page.new(page_params)
     @page.sub_wiki_id = @world.sub_wiki.id;
-    
+
     if @page.save
       flash[:success] = "Page Created"
       @page.categories << @world.sub_wiki.categories.find_by(name: params[:category]) if params[:category]
@@ -45,15 +51,31 @@ class PagesController < ApplicationController
     @world = World.find_by(name: decode(params[:world_name]))
     not_found if @world.nil?
     @page = @world.sub_wiki.pages.find_by(title: decode(params[:page_title]))
-    original_content = @page.content
 
-    if @page.update(page_params)
-      Edit.create!(page: @page, user: current_user, content: original_content) unless @page.content == original_content
+    #if no edits have been made then just return with a success
+    if params[:page_edit][:title] == @page.title && params[:page_edit][:summary] == @page.summary && params[:page_edit][:content] == @page.content
       flash[:success] = "Page updated"
       redirect_to world_page_path(@world.name, @page.title)
     else
-      flash[:errors] = @page.errors
-      redirect_to edit_world_page_path(@world.name, params[:page_title])
+
+      original_content = @page.content
+      @page.title   = params[:page_edit][:title]
+      @page.summary = params[:page_edit][:summary]
+      @page.content = params[:page_edit][:content]
+
+      unless params[:page_edit][:edit_summary].empty?
+        if @page.save
+          Edit.create!(page: @page, user: current_user, content: original_content, summary: params[:page_edit][:edit_summary])
+          flash[:success] = "Page updated"
+          redirect_to world_page_path(@world.name, @page.title)
+        else
+          flash[:errors] = @page.errors
+          redirect_to edit_world_page_path(@world.name, params[:page_title])
+        end
+      else
+        flash[:errors] = {"edit summary" => ["cannot be blank"]}
+        redirect_to edit_world_page_path(@world.name, params[:page_title])
+      end
     end
   end
   
@@ -62,7 +84,11 @@ class PagesController < ApplicationController
     @world = World.find_by(name: decode(params[:world_name]))
     not_found if @world.nil?
     @page = @world.sub_wiki.pages.find_by(title: decode(params[:page_title]))
-    not_found if @page.nil?
+
+    if @page.nil?
+      render :no_page
+      return
+    end
 
     @result = parse(@page.content, params)
 
@@ -71,6 +97,9 @@ class PagesController < ApplicationController
 
     @summary = parse(@page.summary, params)[:html]
 
+  end
+
+  def no_page
   end
 
   def destroy

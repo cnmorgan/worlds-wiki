@@ -1,7 +1,7 @@
 <% @page_title = "#{@page.title}: Edit" %>
 
 <div class="container form-container">
-  <%= form_for @page, url: world_page_path(params[:world_name], @page.title) do |f| %>
+  <%= form_for :page_edit, url: world_page_path(params[:world_name], @page.title), method: :put do |f| %>
     <%= render 'shared/error_messages', errors: flash[:errors] %>
     <div class="form-group">
       <%= f.label :title %>
@@ -14,6 +14,10 @@
     <div class="form-group">
       <%= f.label :content %>
       <%= f.text_area :content, :cols => 250, :rows => 20, value: @page.content, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :edit_summary %>
+      <%= f.text_area :edit_summary, :cols => 250, :rows => 5, class: "form-control" %>
     </div>
     <div class="form-group">
       <%= f.submit "Update!", class: "btn btn-primary" %>

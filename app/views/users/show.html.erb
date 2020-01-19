@@ -11,7 +11,7 @@
         <% unless @user.edits.empty? %>
             <ul class="list-display">
             <% @edits.find_all do |edit| %>
-                <li><%= link_to edit.page.title, world_page_path(edit.page.sub_wiki.world.name, edit.page.title) %><%= " - #{ edit.created_at.strftime("%Y-%m-%d")}" %></li>
+                <li><%= link_to edit.page.title, world_page_path(edit.page.sub_wiki.world.name, edit.page.title) %><%= " - #{edit.summary} - #{ edit.created_at.strftime("%Y-%m-%d")}" %></li>
             <% end %>
             </ul>
             <%= will_paginate @edits %>

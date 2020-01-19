@@ -3,7 +3,7 @@ module Parser
     class Parser
         @@boldRegex = /\*([^*]+)\*/              
         @@italicRegex = /\/\/([^\/\/]+)\/\//        
-        @@strikethroughRegex = /\-\-([^--]+)\-\-/     
+        @@strikethroughRegex = /\-\-([^\-\-]+)\-\-/     
         @@underlineRegex = /__([^__]+)__/         
         @@superscriptRegex = /\^\$([^$]+)\$/      
         @@subscriptRegex = /v\$([^$)]+)\$/         
