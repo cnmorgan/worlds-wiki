@@ -2,7 +2,7 @@
     <nav class="navbar container">
 
     <%= form_tag(page_search_path(@world.name), :method => "get", class: 'navbar-form navbar-left') do %>  
-    <div id="search-data" data-pages="<%= Page.in(@world).pluck(:title).sort.to_json %>">  
+    <div id="search-data-pages" data-pages="<%= Page.in(@world).pluck(:title).sort.to_json %>">  
         <%= search_field_tag :search, params[:search], placeholder: "Search #{@world.name}", class: "form-control" %>  
         <%= button_tag "Search", :class => '',:name => nil%>  
     </div>  

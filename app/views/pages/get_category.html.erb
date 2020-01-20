@@ -3,9 +3,9 @@
 <div class="row form-container">
     <%= form_for :category, url: new_world_page_category_url(params[:world_name], params[:page_title]) do |f| %>
         <%= render 'shared/error_messages', errors: flash[:errors] %>
-        <div class="form-group">
+        <div id="search-data-categories" class="form-group" data-categories="<%= Category.in(@world).pluck(:name).sort.to_json %>">
             <%= f.label :name %>
-            <%= f.text_field :name, autofocus: true, class: "form-control" %>
+            <%= f.search_field :name, autofocus: true, class: "form-control" %>
         </div>
         <div class="form-group">
             <%= f.submit "Add to Category", class: "btn btn-primary" %>

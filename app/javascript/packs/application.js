@@ -8,7 +8,7 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 require("jquery")
-import { autocompleteSearch } from '../custom/autocomplete';
+import { autocompleteExport } from '../custom/autocomplete';
 
 
 
@@ -29,4 +29,5 @@ window.$ = $;
 // const imagePath = (name) => images(name, true)
 //window.onload = autocompleteSearch;
 
-$(document).on("turbolinks:load", autocompleteSearch)
+$(document).on("turbolinks:load", autocompleteExport.categories)
+$(document).on("turbolinks:load", autocompleteExport.search)
