@@ -17,7 +17,7 @@ class PagesController < ApplicationController
         term = params[:q]
         response = []
         @pages.pluck(:title).each do |title|
-          if title.include?(term)
+          if title.downcase.include?(term)
             response << title
           end
         end
