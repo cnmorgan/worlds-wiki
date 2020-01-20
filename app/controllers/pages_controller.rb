@@ -173,13 +173,13 @@ class PagesController < ApplicationController
     best_fit = []
     second_fit = []
     @world.sub_wiki.pages.find_each do |page|
-      if page.title.downcase.include?(params[:search])
+      if page.title.downcase.include?(params[:search].downcase)
         best_fit << page
       end
     end
     puts best_fit.to_s.yellow
     @world.sub_wiki.pages.find_each do |page|
-      if page.content.downcase.include?(params[:search])
+      if page.content.downcase.include?(params[:search].downcase)
         second_fit << page
       end
     end
