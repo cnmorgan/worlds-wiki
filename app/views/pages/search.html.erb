@@ -1,10 +1,10 @@
 <% @page_title = "Search: #{params[:search]} in #{@world.name}" %>
 
-<% @pages.find_each do |page| %>
+<% @pages.each do |page| %>
 <div class="search-result">
-    <h3><%= link_to page.title, world_page_path(@world.name, page.title) %></h3>
+    <h3><%= link_to page[:title], world_page_path(@world.name, page[:title]) %></h3>
     <div class="result-summary">
-    <p><%= as_text(page.summary)[0..30] %>...</p>
+    <p><%= as_text(page[:summary])[0..30] %>...</p>
     </div>
 </div>
 <% end %>

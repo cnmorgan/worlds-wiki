@@ -4,6 +4,8 @@ class PagesController < ApplicationController
   include SessionsHelper
   include PagesHelper
 
+  require 'will_paginate/array'
+
   before_action :increment_view_count, only: [:show]
 
   def index
@@ -167,7 +169,27 @@ class PagesController < ApplicationController
     end
 
     @world = World.find_by(name: params[:world_name])
-    @pages = @world.sub_wiki.pages.basic_search(params[:search]).paginate(page: params[:page], per_page: 15)
+
+    best_fit = []
+    second_fit = []
+    @world.sub_wiki.pages.find_each do |page|
+      if page.title.downcase.include?(params[:search])
+        best_fit << page
+      end
+    end
+    puts best_fit.to_s.yellow
+    @world.sub_wiki.pages.find_each do |page|
+      if page.content.downcase.include?(params[:search])
+        second_fit << page
+      end
+    end
+    puts second_fit.to_s.yellow
+
+    all_fits = best_fit + second_fit
+    puts all_fits.to_s.yellow
+    all_fits = all_fits.map {|page| {title: page.title, summary: page.summary}}
+
+    @pages = all_fits.paginate(page: params[:page], per_page: 15)
     
   end
 

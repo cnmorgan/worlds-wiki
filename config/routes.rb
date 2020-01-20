@@ -17,7 +17,7 @@ Rails.application.routes.draw do
             post    'login',   to: 'sessions#create'   
             delete  'logout',  to: 'sessions#destroy'
 
-            get    '/users' ,                 to: 'users#index',  as: 'users', format: true
+            get    '/users(.:format)' ,                 to: 'users#index',  as: 'users'
             post   '/users' ,                 to: 'users#create'
             get    '/users/new' ,             to: 'users#new',    as: 'new_user'   
             get    '/users/:username/edit' ,  to: 'users#edit',   as: 'edit_user'           
@@ -45,7 +45,7 @@ Rails.application.routes.draw do
             put    '/users/:username/worlds/:world_name/wiki' ,      to: 'sub_wikis#update'                    
 
 
-            get    '/worlds/:world_name/wiki/categories',                                           to: 'categories#index',       as: 'user_world_categories', format: true
+            get    '/worlds/:world_name/wiki/categories(.:format)',                                 to: 'categories#index',       as: 'user_world_categories'
             post   '/worlds/:world_name/wiki/categories',                                           to: 'categories#create'     
             get    '/worlds/:world_name/wiki/categories/new',                                       to: 'categories#new',         as: 'new_user_world_category'
             get    '/worlds/:world_name/wiki/categories/:category_name/edit',                       to: 'categories#edit',        as: 'edit_user_world_category'
@@ -58,8 +58,8 @@ Rails.application.routes.draw do
             post   '/worlds/:world_name/wiki/categories/:category_name/add',                        to: 'categories#add_sub_cat'
             delete '/worlds/:world_name/wiki/categories/:category_name/remove_cat/:sub_name',       to: 'categories#remove_sub_cat', as: 'remove_sub_category', sub_name: /[^\/]+/
 
-            get    '/worlds/:world_name/wiki/pages',                          to: 'pages#index',                    as: 'world_pages', format: true
-            post   '/worlds/:world_name/wiki/pages',                          to: 'pages#create'                    
+            get    '/worlds/:world_name/wiki/pages(.:format)',                to: 'pages#index',                    as: 'world_pages'
+            post   '/worlds/:world_name/wiki/pages',                          to: 'pages#create'             
             get    '/worlds/:world_name/wiki/pages/new',                      to: 'pages#new',                      as: 'new_world_page'
             get    '/worlds/:world_name/wiki/pages/:page_title/edit',         to: 'pages#edit',                     as: 'edit_world_page'
             get    '/worlds/:world_name/wiki/pages/:page_title',              to: 'pages#show',                     as: 'world_page'
