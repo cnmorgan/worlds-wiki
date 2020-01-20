@@ -112,6 +112,8 @@ class PagesController < ApplicationController
 
     @page.destroy
 
+    flash[:success] = "Page successfully deleted."
+
     redirect_to world_wiki_path(decode(params[:world_name]))
 
   end

@@ -75,7 +75,7 @@ class CategoriesController < ApplicationController
     
     flash[:success] = "#{@page.title} removed from #{@category.name}"
 
-    redirect_back_or user_world_category_path(@category.name)
+    redirect_to world_page_path(@world.name, @page.title)
 
   end
 

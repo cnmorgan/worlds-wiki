@@ -31,3 +31,4 @@ window.$ = $;
 
 $(document).on("turbolinks:load", autocompleteExport.categories)
 $(document).on("turbolinks:load", autocompleteExport.search)
+$(document).on("turbolinks:load", autocompleteExport.admins)

@@ -29,7 +29,12 @@
         <ul>
             <span><%= link_to "Categories", user_world_categories_path(@world.name) %> :</span>
             <% @page.categories.find_each do |category| %>
-                <li><%= link_to category.name, user_world_category_path(@world.name, category.name) %>
+                <li>
+                    <%= link_to category.name, user_world_category_path(@world.name, category.name) %>
+                    <% if @world.is_admin?(current_user) %>
+                    (<%= link_to "Remove", remove_page_from_category_path(@world.name, category.name, @page.title), method: :delete, data: {confirm: "Are you sure?"} %>)
+                    <% end %>
+                </li>
             <% end %>
             <% if @world.is_admin?(current_user) %>
             <li><%= link_to "+", new_world_page_category_path(@world.name, @page.title) %></li>

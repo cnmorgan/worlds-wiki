@@ -19,7 +19,7 @@
                     <li>
                     <%= link_to name, "#{view}#{name}" %>
                     <% if admin %>
-                     - (<%= link_to "Delete", "#{delete}#{name}", method: :delete, data: {confirm: "Are you sure?"} %>) 
+                     - (<%= link_to "Remove", "#{delete}#{name}", method: :delete, data: {confirm: "Are you sure?"} %>) 
                     <% end %>
                     </li>
                     <% col_counter += 1 %>
