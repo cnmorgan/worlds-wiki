@@ -32,6 +32,20 @@ class UsersController < ApplicationController
       flash[:danger] = "You don't have permission to do that"
       redirect_to root_path
     end
+
+    respond_to do |format|
+      format.html
+      format.json {
+        term = params[:q]
+        response = []
+        User.all.pluck(:username).each do |name|
+          if name.downcase.include?(term)
+            response << name
+          end
+        end
+        render json: response
+      }
+    end
   end
   
   def show

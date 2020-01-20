@@ -27,7 +27,7 @@
     
     <div class='category-box'>
         <ul>
-            <span><%= link_to "Categories", user_world_categories_path(@world.name) %> :</span>
+            <span><%= link_to "Categories", user_world_categories_path(@world.name, 'html') %> :</span>
             <% @page.categories.find_each do |category| %>
                 <li>
                     <%= link_to category.name, user_world_category_path(@world.name, category.name) %>

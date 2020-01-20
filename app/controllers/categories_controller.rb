@@ -4,6 +4,21 @@ class CategoriesController < ApplicationController
 
   def index
     @world = World.find_by(name: decode(params[:world_name]))
+
+    respond_to do |format|
+      format.html
+      format.json {
+        term = params[:q]
+        response = []
+        @world.sub_wiki.categories.pluck(:name).each do |name|
+          if name.include?(term)
+            response << name
+          end
+        end
+        render json: response
+      }
+    end
+
   end
 
   def show

@@ -1,15 +1,14 @@
 <h1 class='logo'><a href='/'>Worlds Wiki</a></h1>
-<% @world = World.find_by(name: "Worlds Wiki") if @world.nil? %>
 <% if @world && @world.name %>
 <ul>
     <li class="nav-title"><%= @world.name %><li>
     <li><%= link_to "World Page", user_world_path(@world.name) %></li>
     <li><%= link_to "Wiki", world_wiki_path(@world.name) %></li>
-    <li><%= link_to "Browse Categories", user_world_categories_path(@world.name) %>    
+    <li><%= link_to "Browse Categories", user_world_categories_path(@world.name, "html") %>    
     <% if @world.is_admin?(current_user) %>
         <li><%= link_to "New Category", new_user_world_category_path(@world.name) %></li>
     <% end %>
-    <li><%= link_to "Browse Pages", world_pages_path(@world.name) %>
+    <li><%= link_to "Browse Pages", world_pages_path(@world.name, "html") %>
     <% if @world.is_admin?(current_user) %>
         <li><%= link_to "New Page", new_world_page_path(@world.name) %></li>
     <% end %>

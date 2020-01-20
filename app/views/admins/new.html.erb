@@ -3,7 +3,7 @@
 <div class="row form-container">
     <%= form_for :admin, url: create_world_admin_url(params[:world_name]) do |f| %>
         <%= render 'shared/error_messages', errors: flash[:errors] %>
-        <div id="search-data-users" class="form-group" data-users="<%= User.all.pluck(:username).sort.to_json %>">
+        <div id="search-data-users" class="form-group">
             <%= f.label :username %>
             <%= f.text_field :username, autofocus: true, class: "form-control" %>
         </div>

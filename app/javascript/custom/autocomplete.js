@@ -2,73 +2,46 @@ import 'js-autocomplete/auto-complete.css';
 import autocomplete from 'js-autocomplete';
 
 const autocompleteSearch = function() {
-  const data = JSON.parse(document.getElementById('search-data-pages').dataset.pages)
   const searchInput = document.getElementById('search');
+  const worldName = document.getElementById('world-name').dataset.worldname
 
-  if (data && searchInput) {
+  if (searchInput) {
     new autocomplete({
       selector: searchInput,
       minChars: 1,
       source: function(term, suggest){
-          term = term.toLowerCase();
-          const choices = data;
-          const matches = [];
-          for (let i = 0; i < choices.length; i++)
-              if (~choices[i].toLowerCase().indexOf(term)) matches.push(choices[i]);
-          suggest(matches);
+        $.getJSON('/worlds/' + worldName + '/wiki/pages.json', { q: term }, function(data){ suggest(data); });
       },
     });
   }
 };
 
 const autotcompleteCategories = function() {
-    const dataHolder = document.getElementById('search-data-categories')
-    
-    if(dataHolder){
-        
-        const data = JSON.parse(dataHolder.dataset.categories)
-        const searchInput = document.getElementById('category_name');
-    
-        if (data && searchInput) {
-        new autocomplete({
-            selector: searchInput,
-            minChars: 1,
-            source: function(term, suggest){
-                term = term.toLowerCase();
-                const choices = data;
-                const matches = [];
-                for (let i = 0; i < choices.length; i++)
-                    if (~choices[i].toLowerCase().indexOf(term)) matches.push(choices[i]);
-                suggest(matches);
-            },
-        });
-        }
+    const searchInput = document.getElementById('category_name');
+    const worldName = document.getElementById('world-name').dataset.worldname
+
+    if (searchInput) {
+      new autocomplete({
+        selector: searchInput,
+        minChars: 1,
+        source: function(term, suggest){
+          $.getJSON('/worlds/' + worldName + '/wiki/categories.json', { q: term }, function(data){ suggest(data); });
+        },
+      });
     }
 };
 
 const autotcompleteUsers = function() {
-    const dataHolder = document.getElementById('search-data-users')
-    
-    if(dataHolder){
-        
-        const data = JSON.parse(dataHolder.dataset.users)
-        const searchInput = document.getElementById('admin_username');
-    
-        if (data && searchInput) {
-        new autocomplete({
-            selector: searchInput,
-            minChars: 1,
-            source: function(term, suggest){
-                console.log(term)
-                term = term.toLowerCase();
-                const choices = data;
-                const matches = [];
-                for (let i = 0; i < choices.length; i++)
-                    if (~choices[i].toLowerCase().indexOf(term)) matches.push(choices[i]);
-                suggest(matches);
-            },
-        });
-        }
+    const searchInput = document.getElementById('admin_username');
+
+    if (searchInput) {
+      new autocomplete({
+        selector: searchInput,
+        minChars: 1,
+        source: function(term, suggest){
+          $.getJSON('/users.json', { q: term }, function(data){ suggest(data); });
+        },
+      });
     }
 };
 

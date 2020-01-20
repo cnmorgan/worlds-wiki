@@ -16,10 +16,11 @@
     <% if @head_content %>
       <%= @head_content.html_safe %>
     <% end %>
-
+    <% @world = World.find_by(name: "Worlds Wiki") if @world.nil? %>
   </head>
 
   <body>
+    <div hidden id='world-name' data-worldname="<%= @world.name %>"></div>
     <div class='container'>
       <div class="container side-nav">
         <%= render "/shared/side_nav" %>

@@ -10,6 +10,20 @@ class PagesController < ApplicationController
     @world = World.find_by(name: decode(params[:world_name]))
     @pages = @world.sub_wiki.pages
     @page_count = @pages.count
+
+    respond_to do |format|
+      format.html
+      format.json {
+        term = params[:q]
+        response = []
+        @pages.pluck(:title).each do |title|
+          if title.include?(term)
+            response << title
+          end
+        end
+        render json: response
+      }
+    end
   end
 
   def new
