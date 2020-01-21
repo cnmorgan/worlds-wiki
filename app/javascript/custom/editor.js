@@ -5,7 +5,7 @@ import 'codemirror/mode/markdown/markdown.js'
 function initialize(){
     let textArea = document.getElementById('page_edit_content')
     let editor = document.getElementById('content-editor')
-
+    
     if(textArea && !editor){
         var contentEditor = CodeMirror.fromTextArea(textArea, {
                                                     lineWrapping: true,
