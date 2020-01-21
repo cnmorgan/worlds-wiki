@@ -566,6 +566,8 @@ i, em{
 .CodeMirror{
     border: 1px solid $seconday_border_color;
     height: 55vh !important;
+    width: 100%;
+    box-sizing: border-box;
     font-size: .85rem;
     font-family: sans-serif !important;
     margin-top: 10px;

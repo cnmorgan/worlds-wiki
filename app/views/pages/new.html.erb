@@ -1,11 +1,8 @@
 <% @page_title = "New Page" %>
 
 <div class="container form-container">
-  <%= form_for @page, url: world_pages_path(params[:world_name]) do |f| %>
+  <%= form_for @page, url: world_pages_path(params[:world_name]), html: {style: "width: 100%"} do |f| %>
     <%= render 'shared/error_messages', errors: flash[:errors] %> 
-    <% if params[:category] %>     
-    <%= hidden_field_tag :category, params[:category] %>
-    <% end %>
     <div class="form-group">
       <%= f.label :title %>
       <%= f.text_field :title, autofocus: true, class: "form-control" %>
@@ -21,5 +18,8 @@
     <div class="form-group">
       <%= f.submit "Create!", class: "btn btn-primary" %>
     </div>
+    <% if params[:category] %>     
+    <%= hidden_field_tag :category, params[:category] %>
+    <% end %>
   <% end %>
 </div>
