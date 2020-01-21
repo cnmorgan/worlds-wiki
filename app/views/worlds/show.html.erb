@@ -1,8 +1,10 @@
 <% @page_title = @world.name %>
 <% if @world.is_admin?(current_user) %>
 <span class='sub-title'>
-<%= link_to "Edit World", edit_user_world_path(current_user.username, @world.name) %> - 
-<%= link_to("Delete", user_world_path(@world.name) , method: :delete, data: { confirm: 'Are you sure?' }) %>
+<%= link_to "Edit World", edit_user_world_path(current_user.username, @world.name) %>
+<% if current_user_is(@world.owner) %>
+ - <%= link_to("Delete", user_world_path(@world.name) , method: :delete, data: { confirm: 'Are you sure?' }) %>
+<% end %>
 </span>
 <% end %>
 

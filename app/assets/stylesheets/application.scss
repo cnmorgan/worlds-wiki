@@ -55,6 +55,13 @@ body{
     margin: 0;
     line-height: 1;
     font-family: sans-serif;
+    a{
+        text-decoration: none;
+
+        &:hover{
+            text-decoration: underline;
+        }
+    }
 }
 
 p{
@@ -62,11 +69,11 @@ p{
     line-height: 1.3;
 }
 
-b{
+b, strong{
     font-weight: 700;
 }
 
-i{
+i, em{
     font-style: italic;
 }
 
@@ -186,6 +193,15 @@ i{
 
 /* Layout Styles */
 
+#page-title{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: 500;
+    font-size: 3.3rem;
+    padding: 0 0 10px 0;
+    margin: 10px 0;
+    border-bottom: 1px solid $secondary_font_color;
+}
+
 .navbar{
     padding: 5px;
     margin: 3px;
@@ -271,29 +287,29 @@ i{
 
     h1{
         font-family: Georgia, 'Times New Roman', Times, serif;
-        font-weight: 1.2;
-        font-size: 3rem;
+        font-weight: 500;
+        font-size: 2.6rem;
         padding: 10px 8px 5px 0;
-        margin: 10px 0;
+        margin: 14px 0;
         border-bottom: 1px solid $secondary_font_color;
     }
 
     h2{
         font-family: Georgia, 'Times New Roman', Times, serif;
-        font-weight: 1.2;
-        font-size: 2rem;
+        font-weight: 500;
+        font-size: 1.8rem;
         padding: 10px;
         padding-left: 0;
-        margin: 7px 0;
+        margin: 9px 0;
         border-bottom: 1px solid $tertiary_font_color;
     }
 
     h3{
         font-family: Georgia, 'Times New Roman', Times, serif;
-        font-weight: 700;
+        font-weight: 650;
         font-size: 1.5rem;
         padding-left: 0;
-        margin: 5px 0;
+        margin: 12px 0;
     }
 
 }
@@ -307,7 +323,8 @@ i{
     border: 1px solid $seconday_border_color;
     line-height: 1.5;
 
-    padding: 15px;
+    padding: 13px;
+    margin: 10px 0;
 
     ul{
         list-style: none;
@@ -335,7 +352,18 @@ i{
     border: 1px solid $seconday_border_color;
 
     ul{
-        margin-top: 8px;
+        margin: 8px 0 0 8px;
+    }
+
+    ol{
+        margin: 8px 0 0 8px;
+        list-style: decimal;
+        ol{
+            list-style: upper-roman;
+            ol{
+                list-style: lower-roman;
+            }
+        }
     }
 
     li{
@@ -345,6 +373,8 @@ i{
     .page-nav-title{
         font-size: 1rem;
         font-weight: 700;
+        text-align: center;
+        width: 100%;
     }
 
     a{
@@ -414,6 +444,7 @@ i{
         height: 2em;
         padding: 2px;
         border: 1px solid $seconday_border_color;
+        margin: 5px 0;
 
         &:focus{
             border-color: $light_blue;
@@ -425,6 +456,11 @@ i{
         font-size: .85rem;
         line-height: 1.5;
         white-space: pre-wrap;
+        border-width: 1px;
+
+        &:focus{
+            border-color: $light-blue;
+        }
     }
 
     .form-control{
@@ -524,6 +560,19 @@ i{
             }
         }
     }
+}
+
+/* Editor Styles */
+.CodeMirror{
+    border: 1px solid $seconday_border_color;
+    height: 55vh !important;
+    font-size: .85rem;
+    font-family: sans-serif !important;
+    margin-top: 10px;
+}
+
+.CodeMirror-focused{
+    border-color: $light-blue;
 }
 
 /* Debug */

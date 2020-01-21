@@ -39,7 +39,7 @@ class UsersController < ApplicationController
         term = params[:q]
         response = []
         User.all.pluck(:username).each do |name|
-          if name.downcase.include?(term)
+          if name.downcase.include?(term.downcase)
             response << name
           end
         end

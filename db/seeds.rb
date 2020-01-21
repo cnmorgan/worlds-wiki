@@ -1,3 +1,5 @@
+include SeedHelper
+
 puts "Creating admin\n".blue
 
 admin = User.new(email: "admin@test.com", 
@@ -40,7 +42,7 @@ User.find_each do |user|
     print "Adding pages".yellow
 
     for j in 1..35 do
-        world.sub_wiki.pages.create(title: Faker::Books::Lovecraft.unique.word, summary: Parser::Parser.generate_markup(1), content: Parser::Parser.generate_markup(5))
+        world.sub_wiki.pages.create(title: Faker::Books::Lovecraft.unique.word, summary: Faker::Lorem.paragraph, content: generate_markup(5))
         print '.'.yellow
     end
 
@@ -97,7 +99,7 @@ end
 puts "Creating Info world".green
 
 world = admin.owned_worlds.create(name: "Worlds Wiki")
-world.sub_wiki.pages.create(title: "Welcome", summary: "{Welcome to WorldsWiki!}", content:Parser::Parser.generate_markup(2))
+world.sub_wiki.pages.create(title: "Welcome", summary: "Welcome to WorldsWiki!", content: generate_markup(2))
 
 puts "done".green
 

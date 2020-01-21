@@ -12,16 +12,6 @@
     <div class="summary">
         <%= @summary.html_safe %>
     </div>
-    <div class='row'>
-        <div class='page-nav'>
-            <span class="page-nav-title">Contents</span>
-            <ul>
-                <% @sections.each do |section| %>
-                    <li><%= link_to section, "##{section}" %></li>
-                <% end %>
-            </ul>
-        </div>
-    </div>
 
     <%= @html.html_safe %>
     

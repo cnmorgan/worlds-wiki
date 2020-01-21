@@ -11,7 +11,7 @@ class CategoriesController < ApplicationController
         term = params[:q]
         response = []
         @world.sub_wiki.categories.pluck(:name).each do |name|
-          if name.downcase.include?(term)
+          if name.downcase.include?(term.downcase)
             response << name
           end
         end
