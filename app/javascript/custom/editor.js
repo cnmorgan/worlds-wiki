@@ -1,11 +1,11 @@
 import CodeMirror from 'codemirror/lib/codemirror.js'
-import 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/markdown/markdown.js'
+import 'codemirror/lib/codemirror.css'
 
 function initialize(){
     let textArea = document.getElementById('page_edit_content')
     let editor = document.getElementById('content-editor')
-    
+
     if(textArea && !editor){
         var contentEditor = CodeMirror.fromTextArea(textArea, {
                                                     lineWrapping: true,
