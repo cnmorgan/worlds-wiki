@@ -1,6 +1,5 @@
 import CodeMirror from 'codemirror/lib/codemirror.js'
 import 'codemirror/mode/markdown/markdown.js'
-import 'codemirror/lib/codemirror.css'
 
 function initialize(){
     let textArea = document.getElementById('page_edit_content')

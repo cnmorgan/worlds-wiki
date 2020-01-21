@@ -1,8 +1,11 @@
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 require("jquery")
+require("../src/application.scss")
 import { autocompleteExport } from '../custom/autocomplete';
 import { initialize } from '../custom/editor';
 import { formatToc } from '../custom/page_display';
