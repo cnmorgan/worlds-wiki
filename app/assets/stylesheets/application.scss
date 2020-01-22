@@ -67,6 +67,20 @@ body{
         color: $link_color;
         }
     }
+
+    ul{
+        list-style: disc;
+        margin: 15px;
+
+        li{
+            margin-bottom: 7px;
+        }
+    }
+
+    ol{
+        @extend ul;
+        list-style: decimal;
+    }
 }
 
 p{
