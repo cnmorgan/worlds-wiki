@@ -47,9 +47,13 @@ const autotcompleteUsers = function() {
 
 const autotcompleteTemplates = function() {
   const searchInput = document.getElementById('template_title');
-  const username = document.getElementById('username').dataset.username
+  const usernameElement = document.getElementById('username')
 
-  if (searchInput) {
+  if(usernameElement){
+    var username = usernameElement.dataset.username
+  }
+
+  if (username && searchInput) {
     new autocomplete({
       selector: searchInput,
       minChars: 1,
