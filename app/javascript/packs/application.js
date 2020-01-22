@@ -16,5 +16,6 @@ window.$ = $;
 $(document).on("turbolinks:load", autocompleteExport.categories)
 $(document).on("turbolinks:load", autocompleteExport.search)
 $(document).on("turbolinks:load", autocompleteExport.admins)
+$(document).on("turbolinks:load", autocompleteExport.templates)
 $(document).on("turbolinks:load", initialize)
 $(document).on("turbolinks:load", formatToc)

@@ -1,0 +1,11 @@
+<% @page_title = "Template: " + @template.title %> 
+<span class="sub-title">
+<%= link_to "Edit Template", edit_template_path(@user.username, @template.title) %> - 
+<%= link_to "Delete",  user_template_path(@user.username, @template.title), method: :delete, data: { confirm: 'Are you sure?' } %>
+</span>
+
+<div class="page-content">
+    <div class='parser-output'>
+        <%= @html.html_safe %>
+    </div>
+</div>

@@ -17,10 +17,14 @@
 
 <ul>
     <li class='nav-title'>Account</li>
-    <% if !current_user.nil? %>
+    <% if current_user %>
         <li><%= link_to current_user.username, user_path(current_user.username), class: "nav-link" %></li>
-        <li><%= link_to 'Edit Profile' ,edit_user_path(current_user.username) %></li>
         <li><%= link_to "Logout", logout_path, method: :delete, class: "nav-link" %></li>
+        <li><%= link_to 'Edit Profile' ,edit_user_path(current_user.username) %></li>
+        <li><%= link_to "My Worlds", user_worlds_path(current_user.username) %></li>
+        <li><%= link_to "New World", new_user_world_path(current_user.username) %>
+        <li><%= link_to "My Templates", user_templates_path(current_user.username) %></li>
+        <li><%= link_to "New Templates", new_template_path(current_user.username) %></li>
     <% else %>
         <li><a class="nav-link" href="/login">Login</a></li>
         <li><a class="nav-link" href="/users/new">Signup</a></li>
@@ -29,10 +33,6 @@
 
 <ul>
     <li class='nav-title'>Worlds</li>
-    <% if current_user %>
-        <li><%= link_to "My Worlds", user_worlds_path(current_user.username) %></li>
-        <li><%= link_to "New World", new_user_world_path(current_user.username) %>
-    <% end %>
     <li><%= link_to "Browse Worlds", worlds_path %>
 </ul>
 

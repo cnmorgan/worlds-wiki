@@ -5,8 +5,12 @@
     </div>
     <ul>
     <% errors.each do |field, msgs| %>
-      <% msgs.each do |msg| %>
-        <li><%= "#{field} #{msg}" %></li>
+      <% unless msgs.is_a? String %>
+        <% msgs.each do |msg| %>
+          <li><%= "#{field} #{msg}" %></li>
+        <% end %>
+      <% else %>
+        <li><%= "#{field} #{msgs}" %></li>
       <% end %>
     <% end %>
     </ul>

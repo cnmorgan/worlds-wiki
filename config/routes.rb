@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       scope :world_name => /[^\/]+/ do
         scope :category_name => /[^\/]+/ do
           scope :page_title => /[^\/]+/ do
+            scope :template_title => /[^\/]+/ do
             get 'password_resets/new'
             get 'password_resets/edit'
             root 'main#index'
@@ -17,7 +18,7 @@ Rails.application.routes.draw do
             post    'login',   to: 'sessions#create'   
             delete  'logout',  to: 'sessions#destroy'
 
-            get    '/users(.:format)' ,                 to: 'users#index',  as: 'users'
+            get    '/users(.:format)' ,       to: 'users#index',  as: 'users'
             post   '/users' ,                 to: 'users#create'
             get    '/users/new' ,             to: 'users#new',    as: 'new_user'   
             get    '/users/:username/edit' ,  to: 'users#edit',   as: 'edit_user'           
@@ -26,6 +27,18 @@ Rails.application.routes.draw do
             put    '/users/:username' ,       to: 'users#update'
             post   '/users/:username',        to: 'users#update'
             delete '/users/:username' ,       to: 'users#destroy'
+
+            get    '/users/:username/templates(.:format)',              to: 'templates#index',  as: 'user_templates'
+            post   '/users/:username/templates' ,                       to: 'templates#create'
+            get    '/users/:username/templates/new' ,                   to: 'templates#new',    as: 'new_template'   
+            get    '/users/:username/templates/find',                   to: 'templates#find',   as: 'find_template'
+            get    '/users/:username/templates/:template_title/apply',  to: 'templates#apply',  as: 'apply_template'
+            get    '/users/:username/templates/:template_title/edit' ,  to: 'templates#edit',   as: 'edit_template'           
+            get    '/users/:username/templates/:template_title' ,       to: 'templates#show',   as: 'user_template'
+            patch  '/users/:username/templates/:template_title' ,       to: 'templates#update'
+            put    '/users/:username/templates/:template_title' ,       to: 'templates#update'
+            post   '/users/:username/templates/:template_title',        to: 'templates#update'
+            delete '/users/:username/templates/:template_title' ,       to: 'templates#destroy'
             
             get    '/users/:username/worlds',                   to: 'worlds#index', as: 'user_worlds'  
             post   '/users/:username/worlds',                   to: 'worlds#create'
@@ -78,6 +91,7 @@ Rails.application.routes.draw do
 
             get    '/worlds/:world_name/wiki/pages/:page_title/edits', to: 'edits#index', as: 'page_edits'
             resources :password_resets,     only: [:new, :create, :edit, :update]
+          end
         end
        end
       end

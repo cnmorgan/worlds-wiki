@@ -15,6 +15,7 @@ class User < ApplicationRecord
     has_many :owned_worlds, :class_name => "World", dependent: :destroy
     has_many :admin_worlds, :through => :admin_privileges, :source => :world
     has_many :edits
+    has_many :templates, :class_name => "Page", dependent: :destroy
 
     # Returns a random token.
     def User.new_token

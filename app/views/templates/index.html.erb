@@ -1,0 +1,7 @@
+<% @page_title = "#{@user.username}'s templates" %>
+<%= render partial: "shared/page_list", locals: {count: @user.templates.count, 
+                                                 names: @user.templates.order("title ASC").pluck(:title), 
+                                                 col_length: 35, 
+                                                 admin: false,
+                                                 view: "templates/",
+                                                 delete: ""} %>

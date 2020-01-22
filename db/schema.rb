@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_21_072915) do
+ActiveRecord::Schema.define(version: 2020_01_22_042529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,7 +61,9 @@ ActiveRecord::Schema.define(version: 2020_01_21_072915) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "view_count", default: 0
+    t.bigint "user_id"
     t.index ["sub_wiki_id"], name: "index_pages_on_sub_wiki_id"
+    t.index ["user_id"], name: "index_pages_on_user_id"
   end
 
   create_table "sub_wikis", force: :cascade do |t|
@@ -103,6 +105,7 @@ ActiveRecord::Schema.define(version: 2020_01_21_072915) do
   add_foreign_key "edits", "users"
   add_foreign_key "page_categories", "categories"
   add_foreign_key "page_categories", "pages"
+  add_foreign_key "pages", "users"
   add_foreign_key "sub_wikis", "worlds"
   add_foreign_key "worlds", "users"
 end

@@ -3,7 +3,7 @@
 <div class="row form-container">
     <%= form_for :category, url: new_world_page_category_url(params[:world_name], params[:page_title]) do |f| %>
         <%= render 'shared/error_messages', errors: flash[:errors] %>
-        <div id="search-data-categories" class="form-group" data-categories="<%= Category.in(@world).pluck(:name).sort.to_json %>">
+        <div id="search-data-categories" class="form-group">
             <%= f.label :name %>
             <%= f.search_field :name, autofocus: true, class: "form-control" %>
         </div>

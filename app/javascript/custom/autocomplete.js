@@ -45,10 +45,26 @@ const autotcompleteUsers = function() {
     }
 };
 
+const autotcompleteTemplates = function() {
+  const searchInput = document.getElementById('template_title');
+  const username = document.getElementById('username').dataset.username
+
+  if (searchInput) {
+    new autocomplete({
+      selector: searchInput,
+      minChars: 1,
+      source: function(term, suggest){
+        $.getJSON('/users/' + username + '/templates.json', { q: term }, function(data){ suggest(data); });
+      },
+    });
+  }
+};
+
 const autocompleteExport = { 
     search: autocompleteSearch, 
     categories: autotcompleteCategories,
-    admins: autotcompleteUsers
+    admins: autotcompleteUsers,
+    templates: autotcompleteTemplates
 };
 
 export  { autocompleteExport }

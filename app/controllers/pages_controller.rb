@@ -32,6 +32,16 @@ class PagesController < ApplicationController
     @world = World.find_by(name: decode(params[:world_name]))
     @page = Page.new
 
+    if params[:template]
+      @template = current_user.templates.find_by(title: params[:template])
+    end
+
+    if @template
+      @default_content = @template.content
+    else
+      @default_content = ""
+    end
+
     # Stub, change to value based un subscription in the future
     if @world.sub_wiki.pages.count > 99
       flash[:info] = "You have reached the maximum number of pages(#{@world.sub_wiki.pages.count}) for this world."
@@ -108,10 +118,7 @@ class PagesController < ApplicationController
       return
     end
 
-    @result = parse(@page.content, params)
-
-    @sections = @result[:sections]
-    @html = @result[:html]
+    @html = parse(@page.content)
 
   end
 
