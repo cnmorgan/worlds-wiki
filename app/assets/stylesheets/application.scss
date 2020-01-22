@@ -306,7 +306,7 @@ i, em{
         overflow: hidden;
     }
 
-    h2{
+   /* h2{
         font-family: Georgia, 'Times New Roman', Times, serif;
         font-weight: 500;
         font-size: 1.5rem;
@@ -315,14 +315,24 @@ i, em{
         margin: 10px 5px 10px 0;
         border-bottom: 1px solid $tertiary_font_color;
         overflow: hidden;
-    }
+    } */
 
-    h3{
+    h2{
         font-family: Georgia, 'Times New Roman', Times, serif;
         font-weight: 800;
         font-size: 1.5rem;
         padding-left: 0;
         margin: 10px 0;
+        overflow: hidden;
+    }
+
+    h3{
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-weight: 500;
+        font-size: 1.5rem;
+        padding-left: 0;
+        font-style: italic;
+        margin: 10px 0 10px 5px;
         overflow: hidden;
     }
 
