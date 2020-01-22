@@ -62,7 +62,7 @@ class PagesController < ApplicationController
     not_found if @world.nil?
     @page = @world.sub_wiki.pages.find_by(title: decode(params[:page_title]))
 
-    @defaults = {title: @page.title, summary: @page.summary, content: @page.content}
+    @defaults = {title: @page.title, content: @page.content}
   end
 
   def update
@@ -71,14 +71,13 @@ class PagesController < ApplicationController
     @page = @world.sub_wiki.pages.find_by(title: decode(params[:page_title]))
 
     #if no edits have been made then just return with a success
-    if params[:page_edit][:title] == @page.title && params[:page_edit][:summary] == @page.summary && params[:page_edit][:content] == @page.content
+    if params[:page_edit][:title] == @page.title && params[:page_edit][:content] == @page.content
       flash[:success] = "Page updated"
       redirect_to world_page_path(@world.name, @page.title)
     else
 
       original_content = @page.content
       @page.title   = params[:page_edit][:title]
-      @page.summary = params[:page_edit][:summary]
       @page.content = params[:page_edit][:content]
 
       unless params[:page_edit][:edit_summary].empty?
@@ -92,7 +91,7 @@ class PagesController < ApplicationController
         end
       else
         flash.now[:errors] = {"edit summary" => ["cannot be blank"]}
-        @defaults = {title: @page.title, summary: @page.summary, content: @page.content}
+        @defaults = {title: @page.title, content: @page.content}
         render :edit
       end
     end
@@ -113,8 +112,6 @@ class PagesController < ApplicationController
 
     @sections = @result[:sections]
     @html = @result[:html]
-
-    @summary = parse(@page.summary, params)[:html]
 
   end
 
@@ -187,7 +184,7 @@ class PagesController < ApplicationController
 
     all_fits = best_fit + second_fit
     puts all_fits.to_s.yellow
-    all_fits = all_fits.map {|page| {title: page.title, summary: page.summary}}
+    all_fits = all_fits.map {|page| {title: page.title}}
 
     @pages = all_fits.paginate(page: params[:page], per_page: 15)
     
@@ -196,7 +193,7 @@ class PagesController < ApplicationController
   private
 
   def page_params
-    params.require(:page).permit(:title, :summary, :content)
+    params.require(:page).permit(:title, :content)
   end
 
   def increment_view_count

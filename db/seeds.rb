@@ -42,7 +42,7 @@ User.find_each do |user|
     print "Adding pages".yellow
 
     for j in 1..35 do
-        world.sub_wiki.pages.create(title: Faker::Books::Lovecraft.unique.word, summary: Faker::Lorem.paragraph, content: generate_markup(5))
+        world.sub_wiki.pages.create(title: Faker::Books::Lovecraft.unique.word, content: generate_markup(5))
         print '.'.yellow
     end
 
@@ -99,7 +99,7 @@ end
 puts "Creating Info world".green
 
 world = admin.owned_worlds.create(name: "Worlds Wiki")
-world.sub_wiki.pages.create(title: "Welcome", summary: "Welcome to WorldsWiki!", content: generate_markup(2))
+world.sub_wiki.pages.create(title: "Welcome", content: generate_markup(5))
 
 puts "done".green
 

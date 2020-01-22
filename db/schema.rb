@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_17_053558) do
+ActiveRecord::Schema.define(version: 2020_01_21_072915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,7 +56,6 @@ ActiveRecord::Schema.define(version: 2020_01_17_053558) do
 
   create_table "pages", force: :cascade do |t|
     t.string "title"
-    t.text "summary"
     t.text "content"
     t.bigint "sub_wiki_id"
     t.datetime "created_at", precision: 6, null: false

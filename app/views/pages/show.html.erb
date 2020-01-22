@@ -8,12 +8,9 @@
 <%= link_to "Edits",page_edits_path(@world.name, @page.title) %></span>
 
 <div class="page-content">
-
-    <div class="summary">
-        <%= @summary.html_safe %>
+    <div class='parser-output'>
+        <%= @html.html_safe %>
     </div>
-
-    <%= @html.html_safe %>
     
     <div class='category-box'>
         <ul>

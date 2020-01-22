@@ -17,21 +17,6 @@ function initialize(){
     textArea = null
     editor = null
 
-    textArea = document.getElementById('page_edit_summary')
-    editor = document.getElementById("summary-editor")
-
-    if(textArea && !editor){
-        var contentEditor = CodeMirror.fromTextArea(textArea, {
-            lineWrapping: true,
-            mode: "markdown",
-        });
-
-        contentEditor.display.wrapper.id = "summary-editor"
-    }
-
-    textArea = null
-    editor = null
-
     textArea = document.getElementById('page_content')
     editor = document.getElementById("new-content-editor")
 
@@ -42,21 +27,6 @@ function initialize(){
         });
 
         contentEditor.display.wrapper.id = "new-content-editor"
-    }
-
-    textArea = null
-    editor = null
-
-    textArea = document.getElementById('page_summary')
-    editor = document.getElementById("new-summary-editor")
-
-    if(textArea && !editor){
-        var contentEditor = CodeMirror.fromTextArea(textArea, {
-            lineWrapping: true,
-            mode: "markdown",
-        });
-
-        contentEditor.display.wrapper.id = "new-summary-editor"
     }
 }
 
