@@ -112,6 +112,12 @@ class CategoriesController < ApplicationController
         redirect_to add_sub_category_path(params[:world_name], params[:category_name])
         return
       end
+      #Only allow one parent category
+      if @sub_category.category
+        flash[:errors] = {:category => ["already has parent category"]}
+        redirect_to add_sub_category_path(params[:world_name], params[:category_name])
+        return
+      end
       # Dont add a sub category twice
       unless @category.sub_categories.exists?(@sub_category.id)
         @category.sub_categories << @sub_category
