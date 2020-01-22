@@ -29,6 +29,11 @@ class TemplatesController < ApplicationController
 
     def new
         @page = Page.new
+
+        if @user.templates.count > 9
+            flash[:info] = "You have reached your maximum number of Templates"
+            redirect_to user_path(@user.username)
+        end
     end
 
     def create

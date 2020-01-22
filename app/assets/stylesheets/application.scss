@@ -30,7 +30,8 @@ $background_color: rgb(245, 245, 245);
 $container_background_color: rgb(255,255,255);
 $seconday_background_color: rgb(240, 240, 240);
 $tertiary_background_color: rgb(225,225,225);
-$seconday_border_color: rgb(135, 123, 160);
+$primary-border-color: rgb(150, 100, 255);
+$seconday_border_color: rgb(137, 131, 148);
 
 $primary_font_color: $black;
 $green_font_color: rgb(40,130,40);
@@ -38,7 +39,7 @@ $red_font_color: rgb(130,40,40);
 $blue_font_color: rgb(40, 40, 130);
 $secondary_font_color: rgba($black, .75);
 $tertiary_font_color: rgba($black, .50);
-$link_hover_color: rgb(30, 30, 250);
+$link_color: rgb(60, 0, 190);
 
 $button-background-color: rgb(235, 235, 235);
 $button-hover-background-color: rgb(200, 200, 200);
@@ -56,9 +57,14 @@ body{
     font-family: sans-serif;
     a{
         text-decoration: none;
+        color: $link_color;
 
         &:hover{
             text-decoration: underline;
+        }
+
+        &:visited{
+        color: $link_color;
         }
     }
 }
@@ -140,19 +146,21 @@ i, em{
 }
 
 .btn{
-    color: $primary_font_color;
+    color: $primary_font_color !important;
     background-color: $button-background-color;
     border: 1px solid $button-border-color;
-    padding: 10px;
-    border-radius: 5px;
+    padding: 7px;
+    border-radius: 3px;
     text-decoration: none;
     &:active{
         background-color: $button-click-background-color;
-        color: $button-click-font-color;
+        color: $primary_font_color !important;
     }
 
     &:hover{
         background-color: $button-hover-background-color;
+        color: $primary_font_color !important;
+        text-decoration: none;
     }
 }
 
@@ -217,7 +225,11 @@ i, em{
 
     a{
         text-decoration: none !important;
-        color: inherit;
+        color: $primary_font_color;
+
+        &:visited{
+            color: $primary_font_color;
+        }
     }
 }
 
@@ -282,7 +294,7 @@ i, em{
     flex-direction: column;
     padding: 10px 15px;
     margin: 5px;
-    border: 1px solid $light-blue;
+    border: 1px solid $primary-border-color;
 
     h1{
         font-family: Georgia, 'Times New Roman', Times, serif;
@@ -427,7 +439,7 @@ i, em{
         margin: 5px 0;
 
         &:focus{
-            border-color: $light_blue;
+            border-color: $primary-border-color;
         }
 
     }
@@ -439,7 +451,7 @@ i, em{
         border-width: 1px;
 
         &:focus{
-            border-color: $light-blue;
+            border-color: $primary-border-color;
         }
     }
 
@@ -554,7 +566,7 @@ i, em{
 }
 
 .CodeMirror-focused{
-    border-color: $light-blue;
+    border-color: $primary-border-color;
 }
 
 /* Debug */
