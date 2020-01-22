@@ -41,7 +41,7 @@ class PagesController < ApplicationController
     else
       @default_content = ""
     end
-
+    @default_title = ""
     # Stub, change to value based un subscription in the future
     if @world.sub_wiki.pages.count > 99
       flash[:info] = "You have reached the maximum number of pages(#{@world.sub_wiki.pages.count}) for this world."
@@ -61,7 +61,10 @@ class PagesController < ApplicationController
       redirect_to world_page_path(@world.name, @page.title)
     else
       flash[:errors] = @page.errors
-      redirect_to new_world_page_path(@world.name)
+      @default_content = @page.content
+      @default_title = @page.title
+      render :new
+      # redirect_to new_world_page_path(@world.name)
     end
 
   end
