@@ -4,8 +4,12 @@
     <li class="nav-title"><%= @world.name %><li>
     <li><%= link_to "World Page", user_world_path(@world.name) %></li>
     <li><%= link_to "Wiki", world_wiki_path(@world.name) %></li>
-    <li><%= link_to "Browse Categories", user_world_categories_path(@world.name, "html") %>    
-    <li><%= link_to "Browse Pages", world_pages_path(@world.name, "html") %>
+    <li>
+        <ul>
+            <li><%= link_to "Browse Categories", user_world_categories_path(@world.name, "html") %>    
+            <li><%= link_to "Browse Pages", world_pages_path(@world.name, "html") %>
+        </ul>
+    </li>
     <% if @world.is_admin?(current_user) %>
         <li><%= link_to "New Category", new_user_world_category_path(@world.name) %></li>
         <li><%= link_to "New Page", new_world_page_path(@world.name) %></li>
@@ -19,8 +23,12 @@
         <li><%= link_to current_user.username, user_path(current_user.username), class: "nav-link" %></li>
         <li><%= link_to "Logout", logout_path, method: :delete, class: "nav-link" %></li>
         <li><%= link_to 'Edit Profile' ,edit_user_path(current_user.username) %></li>
-        <li><%= link_to "My Worlds", user_worlds_path(current_user.username) %></li>
-        <li><%= link_to "My Templates", user_templates_path(current_user.username) %></li>
+        <li>
+            <ul>
+                <li><%= link_to "My Worlds", user_worlds_path(current_user.username) %></li>
+                <li><%= link_to "My Templates", user_templates_path(current_user.username) %></li>
+            </ul>
+        </li>
         <li><%= link_to "New World", new_user_world_path(current_user.username) %>
         <li><%= link_to "New Templates", new_template_path(current_user.username) %></li>
     <% else %>

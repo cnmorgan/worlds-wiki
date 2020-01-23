@@ -64,11 +64,27 @@ const autotcompleteTemplates = function() {
   }
 };
 
+const autotcompletePages = function() {
+  const searchInput = document.getElementById('page_title');
+  const worldName = document.getElementById('world-name').dataset.worldname
+
+  if (username && searchInput) {
+    new autocomplete({
+      selector: searchInput,
+      minChars: 1,
+      source: function(term, suggest){
+        $.getJSON('/worlds/' + worldName + '/wiki/pages.json', { q: term }, function(data){ suggest(data); });
+      },
+    });
+  }
+};
+
 const autocompleteExport = { 
     search: autocompleteSearch, 
     categories: autotcompleteCategories,
     admins: autotcompleteUsers,
-    templates: autotcompleteTemplates
+    templates: autotcompleteTemplates,
+    pages: autotcompletePages
 };
 
 export  { autocompleteExport }

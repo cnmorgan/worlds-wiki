@@ -83,7 +83,7 @@ class CategoriesController < ApplicationController
 
   def remove_page
     @world = World.find_by(name: decode(params[:world_name]))
-    @category = @world.sub_wiki.categories.find_by(name: decode(params[:category_name]))  
+    @category = @world.sub_wiki.categories.find_by(name: params[:category_name])  
     @page = @world.sub_wiki.pages.find_by(title: params[:page_title])
 
     @category.pages.delete(@page)
@@ -93,6 +93,33 @@ class CategoriesController < ApplicationController
     redirect_to world_page_path(@world.name, @page.title)
 
   end
+
+  def get_page
+    @world = World.find_by(name: decode(params[:world_name]))
+    @category = @world.sub_wiki.categories.find_by(name: params[:category_name])  
+  end
+
+  def add_page
+    @world = World.find_by(name: decode(params[:world_name]))
+    @page = @world.sub_wiki.pages.find_by(title: params[:page][:title])
+    @category = @world.sub_wiki.categories.find_by(name: params[:category_name])
+
+    if @page
+      if @category.pages.find_by(title: @page.title)
+        flash[:errors] = { :category => ["already contains page"] }
+        redirect_to add_page_to_category_path(@world.name, @category.name)
+      else
+        @category.pages << @page
+        flash[:success] = "Successfully added #{@page.title} to #{@category.name}"
+        redirect_to user_world_category_path(@world.name, @category.name)
+      end
+    else
+      flash[:errors] = { :page => ["not found"] }
+      redirect_to add_page_to_category_path(@world.name, @category.name)
+    end
+
+  end
+  
 
   def get_sub_cat
     @world = World.find_by(name: decode(params[:world_name]))

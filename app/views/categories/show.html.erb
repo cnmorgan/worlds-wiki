@@ -10,7 +10,9 @@
 <span class='sub-title'>Parent Category: <%= link_to @category.category.name, user_world_category_path(@world.name, @category.category.name) %></span>
 <% end %>
 <h2>Sub Categories</h2>
+<% if @world.is_admin?(current_user) %>
 <span class="sub-title"><%= link_to "Add Sub Category", add_sub_category_path(@world.name, @category.name) %></span>
+<% end %>
 <% if @world.sub_wiki.categories.empty? %>
 <div>
     <p>No Categories yet!</p>
@@ -25,7 +27,12 @@
 <% end %>
 
 <h2>Pages</h2>
-<span class="sub-title"><%= link_to "Add Page", new_world_page_path(@world.name, category: @category.name) %></span>
+<% if @world.is_admin?(current_user) %>
+<span class="sub-title">
+    <%= link_to "New Page", new_world_page_path(@world.name, category: @category.name) %> - 
+    <%= link_to "Add Page", add_page_to_category_path(@world.name, @category.name) %>
+</span>
+<% end %>
 <%= render partial: "shared/page_list", locals: {count: @category.pages.count, 
                                                  names: @category.pages.order("title ASC").pluck(:title), 
                                                  col_length: 25, 

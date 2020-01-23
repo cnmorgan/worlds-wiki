@@ -1,0 +1,14 @@
+<% @page_title = "#{@category.name}: Add Page" %>
+
+<div class="row form-container">
+    <%= form_for :page, url: add_page_to_category_url(params[:world_name], params[:category_name]) do |f| %>
+        <%= render 'shared/error_messages', errors: flash[:errors] %>
+        <div id="search-data-pages" class="form-group">
+            <%= f.label :title %>
+            <%= f.text_field :title, value: "", autofocus: true, class: "form-control" %>
+        </div>
+        <div class="form-group">
+            <%= f.submit "Add Page", class: "btn btn-primary" %>
+        </div>
+    <% end %>
+</div>

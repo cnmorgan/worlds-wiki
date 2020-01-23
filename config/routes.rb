@@ -67,6 +67,8 @@ Rails.application.routes.draw do
             put    '/worlds/:world_name/wiki/categories/:category_name' ,                           to: 'categories#update' 
             delete '/worlds/:world_name/wiki/categories/:category_name' ,                           to: 'categories#destroy' 
             delete '/worlds/:world_name/wiki/categories/:category_name/remove/:page_title',         to: 'categories#remove_page', as: 'remove_page_from_category' 
+            get    '/worlds/:world_name/wiki/categories/:category_name/add_page',                   to: 'categories#get_page',    as: 'add_page_to_category' 
+            post    '/worlds/:world_name/wiki/categories/:category_name/add_page',                  to: 'categories#add_page'
             get    '/worlds/:world_name/wiki/categories/:category_name/add',                        to: 'categories#get_sub_cat', as: 'add_sub_category'
             post   '/worlds/:world_name/wiki/categories/:category_name/add',                        to: 'categories#add_sub_cat'
             delete '/worlds/:world_name/wiki/categories/:category_name/remove_cat/:sub_name',       to: 'categories#remove_sub_cat', as: 'remove_sub_category', sub_name: /[^\/]+/

@@ -2,7 +2,7 @@
 
 <%= render 'shared/error_messages', errors: flash[:errors] %> 
 
-<h2>Apply Template?</h2>
+<h1>Apply Template?</h1>
 <div class="row form-container">
     <%= form_for :template, url: find_template_url(current_user.username), method: :get do |f| %>
         <%= f.hidden_field :world, value: @world.name %>
@@ -15,7 +15,7 @@
         </div>
     <% end %>
 </div>
-<h2>Page Details</h2>
+<h1>Page Details</h1>
 <div class="container form-container">
   <%= form_for :page, url: world_pages_path(params[:world_name]), html: {style: "width: 100%"} do |f| %>
     <div class="form-group">
