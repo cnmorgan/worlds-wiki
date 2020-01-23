@@ -68,7 +68,7 @@ const autotcompletePages = function() {
   const searchInput = document.getElementById('page_title');
   const worldName = document.getElementById('world-name').dataset.worldname
 
-  if (username && searchInput) {
+  if (worldName && searchInput) {
     new autocomplete({
       selector: searchInput,
       minChars: 1,
