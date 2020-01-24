@@ -65,7 +65,7 @@ const autotcompleteTemplates = function() {
 };
 
 const autotcompletePages = function() {
-  const searchInput = document.getElementById('page_title');
+  const searchInput = document.getElementById('find_page_title');
   const worldName = document.getElementById('world-name').dataset.worldname
 
   if (worldName && searchInput) {

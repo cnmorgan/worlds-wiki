@@ -6,6 +6,7 @@
 <div class="row form-container">
     <%= form_for :template, url: find_template_url(current_user.username), method: :get do |f| %>
         <%= f.hidden_field :world, value: @world.name %>
+        <%= f.hidden_field :category, value: params[:category] ? params[:category] : "" %>
         <div id="search-data-templates" class="form-group">
             <%= f.label :title %>
             <%= f.search_field :title, class: "form-control" %>

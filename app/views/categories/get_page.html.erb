@@ -1,7 +1,7 @@
 <% @page_title = "#{@category.name}: Add Page" %>
 
 <div class="row form-container">
-    <%= form_for :page, url: add_page_to_category_url(params[:world_name], params[:category_name]) do |f| %>
+    <%= form_for :find_page, url: add_page_to_category_url(params[:world_name], params[:category_name]) do |f| %>
         <%= render 'shared/error_messages', errors: flash[:errors] %>
         <div id="search-data-pages" class="form-group">
             <%= f.label :title %>

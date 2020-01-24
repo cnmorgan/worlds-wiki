@@ -88,16 +88,17 @@ class TemplatesController < ApplicationController
 
     def find
         @template = @user.templates.find_by(title: params[:template][:title])
+        puts params.to_s.red
         if @template
-            redirect_to apply_template_path(@user.username, @template.title, world: params[:template][:world])
+            redirect_to apply_template_path(@user.username, @template.title, world: params[:template][:world], category: params[:template][:category] ? params[:template][:category] : "")
         else
-            redirect_to new_world_page_path(world_name: params[:template][:world])
+            redirect_to new_world_page_path(world_name: params[:template][:world], category: params[:template][:category] ? params[:template][:category] : "")
         end
     end
 
     def apply
         @template = @user.templates.find_by(title: params[:template_title])
-        redirect_to new_world_page_path(world_name: params[:world], template: @template.title)
+        redirect_to new_world_page_path(world_name: params[:world], template: @template.title, category: params[:category] ? params[:category] : "")
     end
     
     private
