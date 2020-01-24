@@ -15,10 +15,10 @@ class WorldsController < ApplicationController
   end
   
   def new
-    @world = World.new
+    @new_world = World.new
 
     #stub. In the future this should be determined by user status
-    if @owner.owned_worlds.count == 3
+    if current_user.owned_worlds.count == 3
       flash[:info] = "You have reached your maximum number of worlds. (#{@owner.owned_worlds.count})"
       redirect_to user_path(@owner.username)
     else
