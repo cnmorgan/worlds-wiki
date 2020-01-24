@@ -177,22 +177,21 @@ class PagesController < ApplicationController
 
     @world = World.find_by(name: params[:world_name])
 
-    best_fit = []
-    second_fit = []
+    title_fit = []
+    content_fit = []
     @world.sub_wiki.pages.find_each do |page|
       if page.title.downcase.include?(params[:search].downcase)
-        best_fit << page
+        title_fit << page
       end
     end
-    puts best_fit.to_s.yellow
     @world.sub_wiki.pages.find_each do |page|
       if page.content.downcase.include?(params[:search].downcase)
-        second_fit << page
+        content_fit << page
       end
     end
-    puts second_fit.to_s.yellow
 
-    all_fits = best_fit + second_fit
+    best_fit = title_fit & content_fit
+    all_fits = best_fit + ((title_fit + content_fit) - (best_fit))
     puts all_fits.to_s.yellow
     all_fits = all_fits.map {|page| {title: page.title}}
 
