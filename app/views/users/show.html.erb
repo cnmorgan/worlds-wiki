@@ -5,7 +5,7 @@
     <% end %>
 </div>
 
-<h2>Edit History</h2>
+<h1>Edit History</h1>
 <div class="row">
     <div class="col">
         <% unless @user.edits.empty? %>
@@ -21,7 +21,7 @@
     </div>
 </div>
 
-<h2>Worlds</h2>
+<h1>Worlds</h1>
 <div class="row">
     <% if @user.owned_worlds.empty? %>
         <th scope='col'>No worlds yet!</th>
@@ -34,7 +34,7 @@
                                                     delete: root_url + "/worlds/"} %>
     <% end %>
 </div>
-<h2>Admin of</h2>
+<h1>Admin of</h1>
 <div class="row">
     <% if @user.admin_worlds.empty? %>
         <th scope='col'>No worlds yet!</th>

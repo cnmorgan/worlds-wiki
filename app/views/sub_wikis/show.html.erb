@@ -1,6 +1,6 @@
-<h1><%= @world.name %>'s Wiki</h1>
+<% @page_title = "#{@world.name}'s Wiki" %>
 
-<h2>Top Pages</h2>
+<h1>Top Pages</h1>
 <div class="row">
     <div class="col">
         <ol class="list-display-ordered">
@@ -11,7 +11,7 @@
     </div>
 </div>
 
-<h2>Categories</h2>
+<h1>Categories</h1>
 <% if @world.sub_wiki.categories.empty? %>
 <div>
     <p>No Categories yet!</p>
