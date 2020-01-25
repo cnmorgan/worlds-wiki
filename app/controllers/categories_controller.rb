@@ -94,7 +94,7 @@ class CategoriesController < ApplicationController
   end
 
   def add_page
-    @page = @world.sub_wiki.pages.find_by(title: params[:page][:title])
+    @page = @world.sub_wiki.pages.find_by(title: params[:find_page][:title])
     @category = @world.sub_wiki.categories.find_by(name: params[:category_name])
 
     if @page
