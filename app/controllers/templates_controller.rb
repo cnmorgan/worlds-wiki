@@ -4,6 +4,7 @@ class TemplatesController < ApplicationController
     include PagesHelper
 
     before_action :check_user
+    before_action :get_world
 
     def index
         respond_to do |format|
