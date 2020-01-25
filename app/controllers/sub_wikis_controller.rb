@@ -2,7 +2,7 @@ class SubWikisController < ApplicationController
 
     include ApplicationHelper
     
-    before_action :get_world
+    before_action :check_private
 
     def show
         not_found if @world.nil?

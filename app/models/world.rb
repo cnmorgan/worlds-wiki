@@ -1,5 +1,18 @@
 class World < ApplicationRecord
 
+    scope :are_public, -> { where(is_private: false) }
+    scope :has_admin, -> (user){ 
+        joins(:admins).where(user_id: user.id) 
+    }
+    scope :visible_to, -> (user){ 
+        if user
+            are_public.joins(:admins).or(World.has_admin(user)) 
+        else
+            are_public
+        end
+    }
+
+
     belongs_to :owner, :class_name => "User", :foreign_key => "user_id"
     has_many :admin_privileges, dependent: :destroy
     has_many :admins, :through => :admin_privileges, :source => :user

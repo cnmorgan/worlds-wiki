@@ -7,7 +7,7 @@ class PagesController < ApplicationController
   require 'will_paginate/array'
 
   before_action :increment_view_count, only: [:show]
-  before_action :get_world
+  before_action :check_private
 
   def index
     @pages = @world.sub_wiki.pages

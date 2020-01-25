@@ -45,6 +45,21 @@ module ApplicationHelper
     if params[:world_name]
       @world = World.find_by(name: params[:world_name])
     end
+
+    not_found unless @world
+
+  end
+
+  def check_private
+    get_world
+
+    if @world && @world.is_private?
+      unless @world.is_admin?(current_user)
+        flash[:warning] = "That world is private. You must be an admin to view."
+        redirect_to root_path 
+      end
+    end
+
   end
 
 end

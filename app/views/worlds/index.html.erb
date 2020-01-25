@@ -1,7 +1,7 @@
 <% @page_title = "#{@user.username}'s Worlds'" %>
 
-<%= render partial: "shared/page_list", locals: {count: @user.owned_worlds.count, 
-                                                names: @user.owned_worlds.order("name ASC").pluck(:name), 
+<%= render partial: "shared/page_list", locals: {count: @user.owned_worlds.visible_to(current_user).uniq.count, 
+                                                names: @user.owned_worlds.visible_to(current_user).order("name ASC").pluck(:name).uniq, 
                                                 col_length: 35, 
                                                 admin: false,
                                                 view: root_url + "/worlds/",
