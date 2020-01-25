@@ -168,8 +168,9 @@ class PagesController < ApplicationController
       params[:page] = 1
     end
 
-    best_fit = []
-    second_fit = []
+    title_fit = []
+    content_fit = []
+
     @world.sub_wiki.pages.find_each do |page|
       if page.title.downcase.include?(params[:search].downcase)
         title_fit << page
