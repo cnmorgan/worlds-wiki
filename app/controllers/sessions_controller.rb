@@ -3,6 +3,8 @@ class SessionsController < ApplicationController
   include SessionsHelper
   include ApplicationHelper
 
+  before_action :get_world
+
   def new
   end
 

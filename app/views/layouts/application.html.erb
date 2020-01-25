@@ -20,7 +20,6 @@
     <% if @head_content %>
       <%= @head_content.html_safe %>
     <% end %>
-    <% @world = World.find_by(name: "Worlds Wiki") if @world.nil? %>
   </head>
 
   <body>

@@ -2,8 +2,9 @@ class CategoriesController < ApplicationController
 
   include ApplicationHelper
 
+  before_action :get_world
+
   def index
-    @world = World.find_by(name: decode(params[:world_name]))
 
     respond_to do |format|
       format.html
@@ -22,14 +23,12 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @world = World.find_by(name: decode(params[:world_name]))
     @category = @world.sub_wiki.categories.find_by(name: decode(params[:category_name]))
     not_found if @world.nil? || @category.nil?
     @user = @world.owner
   end
 
   def edit
-    @world = World.find_by(name: decode(params[:world_name]))
     @category = @world.sub_wiki.categories.find_by(name: decode(params[:category_name]))  
   end
 
@@ -46,8 +45,7 @@ class CategoriesController < ApplicationController
   end
 
   def new
-    @category = Category.new
-    @world = World.find_by(name: decode(params[:world_name]))
+    @new_category = Category.new
 
     # Stub, change to value based un subscription in the future
     if @world.sub_wiki.categories.count > 34
@@ -58,7 +56,6 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)
-    @world = World.find_by(name: params[:world_name])
 
     @category.sub_wiki_id = @world.sub_wiki.id
 
@@ -73,7 +70,6 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    @world = World.find_by(name: decode(params[:world_name]))
     @category = @world.sub_wiki.categories.find_by(name: decode(params[:category_name]))  
     @category.destroy
 
@@ -82,7 +78,6 @@ class CategoriesController < ApplicationController
   end
 
   def remove_page
-    @world = World.find_by(name: decode(params[:world_name]))
     @category = @world.sub_wiki.categories.find_by(name: params[:category_name])  
     @page = @world.sub_wiki.pages.find_by(title: params[:page_title])
 
@@ -95,12 +90,10 @@ class CategoriesController < ApplicationController
   end
 
   def get_page
-    @world = World.find_by(name: decode(params[:world_name]))
     @category = @world.sub_wiki.categories.find_by(name: params[:category_name])  
   end
 
   def add_page
-    @world = World.find_by(name: decode(params[:world_name]))
     @page = @world.sub_wiki.pages.find_by(title: params[:page][:title])
     @category = @world.sub_wiki.categories.find_by(name: params[:category_name])
 
@@ -122,12 +115,10 @@ class CategoriesController < ApplicationController
   
 
   def get_sub_cat
-    @world = World.find_by(name: decode(params[:world_name]))
     @category = @world.sub_wiki.categories.find_by(name: decode(params[:category_name]))  
   end
 
   def add_sub_cat
-    @world = World.find_by(name: decode(params[:world_name]))
     @sub_category = @world.sub_wiki.categories.find_by(name: params[:category][:name])
     @category = @world.sub_wiki.categories.find_by(name: params[:category_name])
 
@@ -163,7 +154,6 @@ class CategoriesController < ApplicationController
   end
 
   def remove_sub_cat
-    @world = World.find_by(name: decode(params[:world_name]))
     @sub_category = @world.sub_wiki.categories.find_by(name: params[:sub_name])
     @category = @world.sub_wiki.categories.find_by(name: params[:category_name])
 
@@ -180,7 +170,7 @@ class CategoriesController < ApplicationController
   private
 
     def category_params
-      params.require(:category).permit(:name, :sub_wiki_id)
+      params.require(:new_category).permit(:name, :sub_wiki_id)
     end
     
 

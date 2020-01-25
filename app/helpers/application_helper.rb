@@ -38,4 +38,13 @@ module ApplicationHelper
     raise ActionController::RoutingError.new('Not Found')
   end
 
+  def get_world
+
+    @world = World.find_by(name: "Worlds Wiki")
+
+    if params[:world_name]
+      @world = World.find_by(name: params[:world_name])
+    end
+  end
+
 end

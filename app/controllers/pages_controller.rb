@@ -7,9 +7,9 @@ class PagesController < ApplicationController
   require 'will_paginate/array'
 
   before_action :increment_view_count, only: [:show]
+  before_action :get_world
 
   def index
-    @world = World.find_by(name: decode(params[:world_name]))
     @pages = @world.sub_wiki.pages
     @page_count = @pages.count
 
@@ -29,7 +29,6 @@ class PagesController < ApplicationController
   end
 
   def new
-    @world = World.find_by(name: decode(params[:world_name]))
     @page = Page.new
 
     if params[:template]
@@ -71,7 +70,6 @@ class PagesController < ApplicationController
   
 
   def edit
-    @world = World.find_by(name: decode(params[:world_name]))
     not_found if @world.nil?
     @page = @world.sub_wiki.pages.find_by(title: decode(params[:page_title]))
 
@@ -79,7 +77,6 @@ class PagesController < ApplicationController
   end
 
   def update
-    @world = World.find_by(name: decode(params[:world_name]))
     not_found if @world.nil?
     @page = @world.sub_wiki.pages.find_by(title: decode(params[:page_title]))
 
@@ -112,7 +109,6 @@ class PagesController < ApplicationController
   
 
   def show
-    @world = World.find_by(name: decode(params[:world_name]))
     not_found if @world.nil?
     @page = @world.sub_wiki.pages.find_by(title: decode(params[:page_title]))
 
@@ -130,7 +126,6 @@ class PagesController < ApplicationController
 
   def destroy
 
-    @world = World.find_by(name: decode(params[:world_name]))
     @page = @world.sub_wiki.pages.find_by(title: decode(params[:page_title]))
 
     @page.destroy
@@ -142,13 +137,11 @@ class PagesController < ApplicationController
   end
 
   def get_category
-    @world = World.find_by(name: decode(params[:world_name]))
     @page = @world.sub_wiki.pages.find_by(title: decode(params[:page_title]))
   end
   
 
   def add_to_category
-    @world = World.find_by(name: decode(params[:world_name]))
     @category = @world.sub_wiki.categories.find_by(name: params[:category][:name])
     @page = @world.sub_wiki.pages.find_by(title: decode(params[:page_title]))
 
@@ -174,8 +167,6 @@ class PagesController < ApplicationController
     unless params[:page]
       params[:page] = 1
     end
-
-    @world = World.find_by(name: params[:world_name])
 
     best_fit = []
     second_fit = []

@@ -1,9 +1,10 @@
 class SubWikisController < ApplicationController
 
     include ApplicationHelper
+    
+    before_action :get_world
 
     def show
-        @world = World.find_by(name: decode(params[:world_name]))
         not_found if @world.nil?
     end
 

@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 
   before_action :check_site_admin, only: [:destroy]
   before_action :check_user_privilege, only: [:edit]
+  before_action :get_world
 
   def new
     @user = User.new

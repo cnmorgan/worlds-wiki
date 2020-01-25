@@ -5,6 +5,7 @@ class WorldsController < ApplicationController
   # before_action :check_site_admin, only: [:index, :destroy]
   before_action :check_logged_in, except: [:show, :index, :all]
   before_action :check_admin, only: [:edit]
+  before_action :get_world
 
   def all 
   end
@@ -47,7 +48,6 @@ class WorldsController < ApplicationController
   end
 
   def update
-    @world = World.find_by(name: params[:world_name])
 
     if @world.update(name: world_params[:name])
       flash[:success] = "Successfully Update #{@world.name}"
@@ -59,15 +59,13 @@ class WorldsController < ApplicationController
   end
 
   def destroy
-    world = World.find_by(name: decode(params[:world_name]))
     owner = world.owner
-    world.destroy
+    @world.destroy
 
     redirect_to user_path(owner.username)
   end
 
   def show
-    @world = World.find_by(name: decode(params[:world_name]))
   end
 
   
