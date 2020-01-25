@@ -3,6 +3,8 @@ class SessionsController < ApplicationController
   include SessionsHelper
   include ApplicationHelper
 
+  before_action :check_private
+
   def new
   end
 

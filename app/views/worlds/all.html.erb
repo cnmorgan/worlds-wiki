@@ -1,7 +1,7 @@
 <% @page_title = "Worlds" %>
 
-<%= render partial: "shared/page_list", locals: {count: World.count, 
-                                                 names: World.order("name ASC").pluck(:name), 
+<%= render partial: "shared/page_list", locals: {count: World.visible_to(current_user).uniq.count, 
+                                                 names: World.visible_to(current_user).order("name ASC").pluck(:name).uniq, 
                                                  col_length: 35, 
                                                  admin: false,
                                                  view: "worlds/",
