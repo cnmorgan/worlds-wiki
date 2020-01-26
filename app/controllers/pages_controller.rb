@@ -106,7 +106,7 @@ class PagesController < ApplicationController
 
     else
       not_found if @world.nil?
-      @page = @world.sub_wiki.pages.find_by(title: decode(params[:page_title]))
+      @page = @world.sub_wiki.pages.find_by(title: params[:page_title])
 
       #if no edits have been made then just return with a success
       if params[:page_edit][:title] == @page.title && params[:page_edit][:content] == @page.content
@@ -125,12 +125,13 @@ class PagesController < ApplicationController
             redirect_to world_page_path(@world.name, @page.title)
           else
             flash[:errors] = @page.errors
-            redirect_to edit_world_page_path(@world.name, params[:page_title])
+            generate_draft(params[:page_title], @page.content)
+            redirect_to edit_world_page_path(@world.name, params[:page_title], draft: true)
           end
         else
-          flash.now[:errors] = {"edit summary" => ["cannot be blank"]}
-          @defaults = {title: @page.title, content: @page.content}
-          render :edit
+          flash[:errors] = {"edit summary" => ["cannot be blank"]}
+          generate_draft(params[:page_title], @page.content)
+          redirect_to edit_world_page_path(@world.name, params[:page_title], draft: true)
         end
       end
     end
@@ -252,6 +253,12 @@ class PagesController < ApplicationController
     Page.where(is_draft: true).destroy_all
     @page = Page.create(title: title, content: content, sub_wiki: @world.sub_wiki, is_draft: true)
     redirect_to world_page_path(@world.name, @page.title, draft: true, origin: origin) unless @page.errors.any?
+  end
+
+  def generate_draft(original_title, content)
+    Page.where(is_draft: true).destroy_all
+    title = original_title + "-Preview" unless original_title.blank?
+    @page = Page.create(title: title, content: content, sub_wiki: @world.sub_wiki, is_draft: true)
   end
   
 end
