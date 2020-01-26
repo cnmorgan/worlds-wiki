@@ -1,6 +1,7 @@
 class Page < ApplicationRecord
 
     scope :in, ->(world) { where(sub_wiki_id: world.sub_wiki.id) }
+    scope :not_drafts, -> { where(is_draft: false) }
     
     belongs_to :sub_wiki, optional: true
     belongs_to :user, optional: true

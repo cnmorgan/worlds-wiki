@@ -1,0 +1,16 @@
+
+<% @page_title = @page.title %>
+
+<div>
+    <%= link_to "Return to #{@origin}", @origin_url %>
+</div>
+
+<div class="page-content">
+    <div class='parser-output'>
+        <%= @html.html_safe %>
+    </div>
+</div>
+
+<div>
+    <%= link_to "Return to #{@origin}", @origin_url %>
+</div>

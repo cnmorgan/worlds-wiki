@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_25_020233) do
+ActiveRecord::Schema.define(version: 2020_01_26_003636) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 2020_01_25_020233) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "view_count", default: 0
     t.bigint "user_id"
+    t.boolean "is_draft", default: false
     t.index ["sub_wiki_id"], name: "index_pages_on_sub_wiki_id"
     t.index ["user_id"], name: "index_pages_on_user_id"
   end
