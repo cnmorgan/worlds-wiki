@@ -86,4 +86,10 @@ class User < ApplicationRecord
         self.activation_digest = User.digest(activation_token)
     end
 
+    # Used for testing. This should not be used in production code.
+    def reset_activation_digest
+        self.activation_token  = User.new_token
+        self.update(activation_digest: User.digest(activation_token))
+    end
+
 end

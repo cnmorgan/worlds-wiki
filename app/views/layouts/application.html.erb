@@ -23,7 +23,7 @@
   </head>
 
   <body>
-    <div hidden id='world-name' data-worldname="<%= @world.name %>"></div>
+    <div hidden id='world-name' data-worldname="<%= @world.nil? ? "" : @world.name %>"></div>
     <% if current_user %>
       <div hidden id='username' data-username="<%= current_user.username %>"></div>
     <% end %>

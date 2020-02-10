@@ -1,11 +1,13 @@
 <header class="page-header">
     <nav class="navbar container">
 
-    <%= form_tag(page_search_path(@world.name), :method => "get", class: 'navbar-form navbar-left') do %>  
-    <div id="search-data-pages">  
-        <%= search_field_tag :search, params[:search], placeholder: "Search #{@world.name}", class: "form-control" %>  
-        <%= button_tag "Search", :class => '',:name => nil%>  
-    </div>  
+    <% if @world %>
+        <%= form_tag(page_search_path(@world.name), :method => "get", class: 'navbar-form navbar-left') do %>  
+        <div id="search-data-pages">  
+            <%= search_field_tag :search, params[:search], placeholder: "Search #{@world.name}", class: "form-control" %>  
+            <%= button_tag "Search", :class => '',:name => nil%>  
+        </div>  
+        <% end %>
     <% end %>
 
     </nav>

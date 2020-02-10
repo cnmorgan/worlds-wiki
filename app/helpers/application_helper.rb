@@ -46,7 +46,7 @@ module ApplicationHelper
       @world = World.find_by(name: params[:world_name])
     end
 
-    not_found unless @world
+    return @world
 
   end
 
