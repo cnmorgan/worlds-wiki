@@ -12,7 +12,7 @@ describe 'User signing in' do
 
   context 'that exists' do
     context 'and is activated' do
-      let(:user) {create(:user, :activated, username: 'example')}
+      let(:user) {create(:user, username: 'example')}
       
       it 'can sign in' do      
         sign_in(user.email, 'password')
@@ -23,7 +23,7 @@ describe 'User signing in' do
     end
 
     context 'and is not activated' do
-      let(:user) {create(:user, username: 'example')}
+      let(:user) {create(:user, :unactivated, username: 'example')}
       
       it 'cannot sign in' do      
         sign_in(user.email, 'password')

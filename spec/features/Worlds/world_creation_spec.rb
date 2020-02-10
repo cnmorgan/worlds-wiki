@@ -8,7 +8,7 @@ describe 'User making a world' do
   end
 
   context 'when logged in' do
-    let(:user) {create(:user, :activated)}
+    let(:user) {create(:user)}
 
     before(:each) do
       sign_in(user.email, 'password')

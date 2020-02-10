@@ -5,16 +5,16 @@ FactoryBot.define do
     password {'password'}
     password_confirmation {'password'}
     is_site_admin {false}
-    activated {false}
-    activated_at {nil}
+    activated {true}
+    activated_at {Time.now}
 
     trait :admin do
       is_site_admin {true}
     end
 
-    trait :activated do
-      activated { true }
-      activated_at { Time.now }
+    trait :unactivated do
+      activated { false }
+      activated_at { nil }
     end
 
   end

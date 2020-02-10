@@ -4,13 +4,13 @@ class World < ApplicationRecord
     scope :has_admin, -> (user){ 
         joins(:admins).where(user_id: user.id) 
     }
-    scope :visible_to, -> (user){ 
+    def self.visible_to(user) 
         if user
             are_public.joins(:admins).or(World.has_admin(user)) 
         else
             are_public
         end
-    }
+    end
 
 
     belongs_to :owner, :class_name => "User", :foreign_key => "user_id"
