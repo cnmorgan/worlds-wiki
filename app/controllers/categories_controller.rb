@@ -33,9 +33,9 @@ class CategoriesController < ApplicationController
   end
 
   def update
-    @category = Category.find_by(name:params[:category_name])
+    @category = Category.find_by(name: params[:category_name])
 
-    if @category.update(category_params)
+    if @category.update(update_params)
       flash[:success] = "Successfully updated category: #{@category.name}"
       redirect_to user_world_category_path(params[:world_name], @category.name)
     else
@@ -173,6 +173,9 @@ class CategoriesController < ApplicationController
       params.require(:new_category).permit(:name, :sub_wiki_id)
     end
     
+    def update_params
+      params.require(:edit_category).permit(:name, :sub_wiki_id)
+    end
 
 
 end

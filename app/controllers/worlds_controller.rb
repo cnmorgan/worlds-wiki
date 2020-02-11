@@ -29,8 +29,6 @@ class WorldsController < ApplicationController
 
     @owner = User.find_by(username: params[:username])
 
-      puts params.to_s.magenta
-
       @world = World.new(name: world_params[:name], is_private: world_params[:is_private], owner: @owner)
       
       if @world.save

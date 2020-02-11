@@ -17,6 +17,7 @@ describe 'Managing admins' do
 
     it 'should allow revoking admins' do
       visit user_world_path(world.name)
+
       click_on 'revoke'
 
       expect(world.is_admin?(admin)).to be false
