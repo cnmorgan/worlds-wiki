@@ -9,5 +9,13 @@ class Category < ApplicationRecord
     has_many :pages, :through => :page_categories
 
     validates :name, presence: true
+    validate :unique_to_world
+
+    private
+        def unique_to_world
+            unless self.sub_wiki.categories.where(name: self.name).where.not(id: self.id).empty?
+                self.errors.add(:name, 'already exists')
+            end
+        end
 
 end
