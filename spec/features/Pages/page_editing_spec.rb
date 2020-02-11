@@ -46,6 +46,14 @@ describe 'Editing a page' do
 
       expect(page).to have_error_explanation 'edit summary cannot be blank'
     end
+
+    it 'should allow page deletion' do
+      visit world_page_path(world.name, wiki_page.title)
+
+      click_on 'Delete'
+
+      expect(page).to have_title "#{world.name}'s Wiki"
+    end
   end
 end
 
