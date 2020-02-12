@@ -13,6 +13,15 @@ class Page < ApplicationRecord
     validate :unique_to_wiki, if: :page?
     validate :unique_to_user, if: :template?
 
+
+    def page?
+        self.sub_wiki
+    end
+    
+    def template?
+        self.user
+    end
+
     private
 
         def unique_to_wiki
@@ -26,15 +35,4 @@ class Page < ApplicationRecord
                 self.errors.add(:title, "already exists")
             end  
         end
-
-        def page?
-            self.sub_wiki
-        end
-        
-        def template?
-            self.user
-        end
-        
-        
-        
 end

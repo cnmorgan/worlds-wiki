@@ -19,6 +19,7 @@ class PagesController < ApplicationController
         term = params[:q]
         response = []
         @pages.pluck(:title).each do |title|
+          next if title.include?("-Preview")
           if title.downcase.include?(term.downcase)
             response << title
           end
@@ -213,6 +214,7 @@ class PagesController < ApplicationController
     content_fit = []
 
     @world.sub_wiki.pages.find_each do |page|
+      next if page.is_draft
       if page.title.downcase.include?(params[:search].downcase)
         title_fit << page
       end
