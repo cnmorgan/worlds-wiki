@@ -4,4 +4,10 @@ FactoryBot.define do
     sequence(:title) { |n| "Page #{n}" }
     content { "" }
   end
+
+  factory :template, class: Page do
+    association :user, strategy: :null
+    sequence(:title) { |n| "Page #{n}" }
+    content { "" }
+  end
 end
