@@ -151,15 +151,14 @@ class PagesController < ApplicationController
         @origin_url = new_world_page_path(@world.name, title: @page.title.delete_suffix('-Preview'))
       end
       render 'page_preview'
+    elsif @page.nil?
+      render :no_page
+      return
     else
       @html = parse(@page.content)
       @page = @world.sub_wiki.pages.find_by(title: params[:page_title], is_draft: false)
     end
 
-    if @page.nil?
-      render :no_page
-      return
-    end
 
   end
 
