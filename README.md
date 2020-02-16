@@ -18,21 +18,17 @@ Feel free to make branches and add features and/or bug fixes to this project. If
 
 This project uses ruby 2.6.5 and rails 6.0.0
 
-## Clone repo
+## Getting Started
 
-Start by making a local clone of the repository `git clone https://github.com/cnmorgan/worlds-wiki.git`
-
-## Generate Sample data
-
-Generate some sample data with: `rake dev:reset_db`
-
-## Launch Server
-
-Launch to rails server with `rails s` and go to localhost:3000 to see the running app.
+- First, create a fork of this repository
+- then make a local clone of your fork
+- Generate some sample data with: `rake dev:reset_db`
+- Launch to rails server with `rails s`
+- go to localhost:3000 to see the running app.
 
 ## Make Changes
 
-From here you should be good to go to make any change you want to the code base
+Once you have the app running locally, feel free to start making changes. I am open to any kind of pull request so long as it does not break the app or change it in some fundamental way. That said, feel free to do that for your own personal version!
 
 ## Testing
 
