@@ -10,6 +10,18 @@ Currently, Worlds wiki is a fairly bare bones wikibuilder. However, it is comple
 
 [Here](https://www.worldswiki.com/worlds/Worlds%20Wiki/wiki/pages/Welcome) is a live version of the app.
 
+# Running locally
+
+If you would like to just run a local version of worlds wiki do the following:
+
+- First, create a fork of this repository
+- then make a local clone of your fork
+- Launch to rails server with `rails s`
+- go to localhost:3000 to see the running app.
+- Currently, the app expects a World Called 'Worlds Wiki' with a page 'Welcome' to exist, so you will want to create these to avoid any possible issues
+
+Once you have it running you can start making worlds and wikis and saving them all locally. Please note: there are currently hard coded limits on worlds, pages, and categories. If you want to change or remove them look in the respective controllers.
+
 # Development
 
 Feel free to make branches and add features and/or bug fixes to this project. If there is interest I'd love to see this project grow.
