@@ -10,6 +10,10 @@ Currently, Worlds wiki is a fairly bare bones wikibuilder. However, it is comple
 
 [Here](https://www.worldswiki.com/worlds/Worlds%20Wiki/wiki/pages/Welcome) is a live version of the app.
 
+# Dependencies
+
+This project uses ruby 2.6.5 and rails 6.0.0
+
 # Running locally
 
 If you would like to just run a local version of worlds wiki do the following:
@@ -25,10 +29,6 @@ Once you have it running you can start making worlds and wikis and saving them a
 # Development
 
 Feel free to make branches and add features and/or bug fixes to this project. If there is interest I'd love to see this project grow.
-
-## Versions
-
-This project uses ruby 2.6.5 and rails 6.0.0
 
 ## Getting Started
 
